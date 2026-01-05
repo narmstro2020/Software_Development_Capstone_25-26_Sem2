@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit_01-Introduction_to_C_Sharp", "Unit_01-Introduction_to_C_Sharp", "{B79E4ABF-F51A-4989-9C38-333EE3EE0C44}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01_Setup_Console_App", "01_Setup_Console_App", "{F219B8AE-D41C-42AC-89B0-33C6D56DCC11}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01_Assignment", "01_Assignment", "{8E9C8C97-9AAB-4C3B-8B00-023EC91FB751}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Program", "Program\Program.csproj", "{62102CEE-922A-4D85-8C43-27A6DD825D58}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F219B8AE-D41C-42AC-89B0-33C6D56DCC11} = {B79E4ABF-F51A-4989-9C38-333EE3EE0C44}
+		{8E9C8C97-9AAB-4C3B-8B00-023EC91FB751} = {F219B8AE-D41C-42AC-89B0-33C6D56DCC11}
+		{62102CEE-922A-4D85-8C43-27A6DD825D58} = {8E9C8C97-9AAB-4C3B-8B00-023EC91FB751}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{62102CEE-922A-4D85-8C43-27A6DD825D58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62102CEE-922A-4D85-8C43-27A6DD825D58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62102CEE-922A-4D85-8C43-27A6DD825D58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62102CEE-922A-4D85-8C43-27A6DD825D58}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
