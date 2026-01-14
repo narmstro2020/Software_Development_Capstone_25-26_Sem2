@@ -15,7 +15,7 @@ Suggested pacing (~20 minutes):
 12–20 min Operator overloading (rules + a Fraction example)
 */
 
-namespace U1B1_Notes;
+namespace Operators;
 
 public static class Program
 {
@@ -46,17 +46,17 @@ public static class Program
         /*
         Vocabulary (fill in the blanks):
 
-        Operator: a symbol that performs an operation on one or more _________.
+        Operator: a symbol that performs an operation on one or more operands.
         Operand: the value(s) an operator works on.
-        Unary operator: works on ______ operand.
-        Binary operator: works on ______ operands.
-        Ternary operator: works on ______ operands (example: _____ ? _____ : _____)
+        Unary operator: works on 1 operand.
+        Binary operator: works on 2 operands.
+        Ternary operator: works on 3 operands  ?:  (example: n > 2 ? "Greater Than 2" : Not Greater than 2)
 
-        Short-circuit: the runtime may skip evaluating the ______ side of a boolean expression
-                       if the result is already determined by the ______ side.
+        Short-circuit: the runtime may skip evaluating the right side of a boolean expression
+                       if the result is already determined by the left side.
 
         Overload (operator overloading): defining how an operator like + or == behaves for a
-                                         _______ type (your own struct/class).
+                                         custom type (your own struct/class).
 
         Categories of operators (examples):
         - Arithmetic:  +  -  *  /  %
@@ -82,10 +82,10 @@ public static class Program
         int b = 2;
 
         // Predict BEFORE running:
-        // 7 / 2 = ________
-        // 7 / 2.0 = ________
-        // -7 / 2 = ________
-        // -7 % 2 = ________
+        // 7 / 2 = 3
+        // 7 / 2.0 = 3.5
+        // -7 / 2 = -3
+        // -7 % 2 = -1
         Console.WriteLine($"7 / 2 = {7 / 2}");
         Console.WriteLine($"7 / 2.0 = {7 / 2.0}");
         Console.WriteLine($"-7 / 2 = {-7 / 2}");
@@ -114,7 +114,7 @@ public static class Program
         int x = 5;
 
         // Fill in predictions:
-        // After y = ++x, x is ______ and y is ______.
+        // After y = ++x, x is 6 and y is 6.
         int y = ++x;
 
         Console.WriteLine($"After y = ++x; x={x}, y={y}");
@@ -122,10 +122,11 @@ public static class Program
         x = 5;
 
         // Fill in predictions:
-        // After z = x++, x is ______ and z is ______.
+        // After z = x++, x is 6 and z is 5.
         int z = x++;
 
         Console.WriteLine($"After z = x++; x={x}, z={z}\n");
+
 
         /*
         Rule:
@@ -163,8 +164,8 @@ public static class Program
 
         /*
         Fill in:
-        - && is a ____________ operator (may skip evaluating the right side).
-        - & (on bool) is ____________ (always evaluates both sides).
+        - && is a logical operator (may skip evaluating the right side).
+        - & (on bool) is short-circuit logical operator (always evaluates both sides).
 
         Why it matters:
         - Use && / || for normal boolean logic and safety checks.
@@ -180,8 +181,8 @@ public static class Program
         Console.WriteLine("=== PART E: Operator Precedence ===\n");
 
         // Predict BEFORE running:
-        // 2 + 3 * 4 = ________
-        // (2 + 3) * 4 = ________
+        // 2 + 3 * 4 = 2 + 12 = 14
+        // (2 + 3) * 4 = 5 * 4 = 20
         Console.WriteLine($"2 + 3 * 4 = {2 + 3 * 4}");
         Console.WriteLine($"(2 + 3) * 4 = {(2 + 3) * 4}\n");
 
@@ -200,7 +201,7 @@ public static class Program
         Console.WriteLine("=== PART F: checked vs unchecked (Overflow) ===\n");
 
         // Predict BEFORE running:
-        // int.MaxValue + 1 in unchecked context becomes ________ (wraps around).
+        // int.MaxValue + 1 in unchecked context becomes int.MinValue (wraps around).
         unchecked
         {
             int n = int.MaxValue;
@@ -227,7 +228,7 @@ public static class Program
 
         /*
         Fill in:
-        - Use checked when overflow would be a ________ bug.
+        - Use checked when overflow would be a bad bug.
         - unchecked can be useful when you WANT wraparound behavior (rare in beginner apps).
         */
     }
@@ -239,10 +240,10 @@ public static class Program
     {
         /*
         Operator overloading rules (fill in):
-        1) Operator overloads must be ______ and ______.
-        2) They must be defined inside the ______ being overloaded.
-        3) You cannot overload assignment operators like ______.
-        4) If you overload == you should also overload ______, and implement:
+        1) Operator overloads must be immutable and static.
+        2) They must be defined inside the class or struct being overloaded.
+        3) You cannot overload assignment operators like =.
+        4) If you overload == you should also overload !=, and implement:
            - Equals(...)
            - GetHashCode()
            - (Recommended) IEquatable<T>
@@ -257,6 +258,7 @@ public static class Program
 
         Fraction f1 = new Fraction(1, 2);
         Fraction f2 = new Fraction(3, 4);
+
 
         Console.WriteLine($"f1 = {f1}  (should be 1/2)");
         Console.WriteLine($"f2 = {f2}  (should be 3/4)");
@@ -282,7 +284,7 @@ public static class Program
         /*
         Mini-Reflection:
         - Overloading + should NOT secretly mutate f1 or f2. Why?
-          Answer: _______________________________________________
+          Answer: that would defeat the purpose.  3 + 2 is a new number 5
         */
     }
 }
@@ -300,7 +302,11 @@ public readonly struct Fraction : IEquatable<Fraction>
         if (den == 0) throw new ArgumentException("Denominator cannot be 0.");
 
         // Keep denominator positive
-        if (den < 0) { num = -num; den = -den; }
+        if (den < 0)
+        {
+            num = -num;
+            den = -den;
+        }
 
         int g = Gcd(Math.Abs(num), den);
         Num = num / g;
@@ -315,8 +321,18 @@ public readonly struct Fraction : IEquatable<Fraction>
     // -------------------------
     public static Fraction operator +(Fraction a, Fraction b)
     {
-        // TODO: Replace placeholder
-        return new Fraction(0, 1);
+        var aNum = a.Num;
+        var bNum = b.Num;
+        var aDen = a.Den;
+        var bDen = b.Den;
+
+        var common = aDen * bDen;
+        var newANum = common / aDen * aNum;
+        var newBNum = common / bDen * bNum;
+
+        var sum = newANum + newBNum;
+
+        return new Fraction(sum, common);
     }
 
     // -------------------------
@@ -325,8 +341,10 @@ public readonly struct Fraction : IEquatable<Fraction>
     // -------------------------
     public static Fraction operator *(Fraction a, Fraction b)
     {
-        // TODO: Replace placeholder
-        return new Fraction(0, 1);
+        var newNum = a.Num * b.Num;
+        var newDen = a.Den * b.Den;
+
+        return new Fraction(newNum, newDen);
     }
 
     // -------------------------
@@ -335,8 +353,7 @@ public readonly struct Fraction : IEquatable<Fraction>
     // -------------------------
     public static Fraction operator -(Fraction a)
     {
-        // TODO: Replace placeholder
-        return new Fraction(0, 1);
+        return new Fraction(-a.Num, a.Den);
     }
 
     // -------------------------
@@ -345,14 +362,12 @@ public readonly struct Fraction : IEquatable<Fraction>
     // -------------------------
     public static bool operator ==(Fraction a, Fraction b)
     {
-        // TODO: Replace placeholder
-        return false;
+        return a.Num == b.Num && a.Den == b.Den;
     }
 
     public static bool operator !=(Fraction a, Fraction b)
     {
-        // TODO: Replace placeholder
-        return true;
+        return !(a == b);
     }
 
     // IEquatable implementation (should match ==)
@@ -394,6 +409,7 @@ public readonly struct Fraction : IEquatable<Fraction>
             a = b;
             b = t;
         }
+
         return a == 0 ? 1 : a;
     }
 }
