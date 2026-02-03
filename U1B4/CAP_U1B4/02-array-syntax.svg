@@ -1,0 +1,199 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+    <linearGradient id="syntaxGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4ecca3"/>
+      <stop offset="100%" style="stop-color:#3db389"/>
+    </linearGradient>
+    <linearGradient id="typeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#c792ea"/>
+      <stop offset="100%" style="stop-color:#b07acc"/>
+    </linearGradient>
+    <linearGradient id="keywordGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e94560"/>
+      <stop offset="100%" style="stop-color:#c73e54"/>
+    </linearGradient>
+    <linearGradient id="valueGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffc107"/>
+      <stop offset="100%" style="stop-color:#e5ad06"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="900" fill="#0f0f1a"/>
+  
+  <!-- Grid pattern -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1a1a2e" stroke-width="1"/>
+  </pattern>
+  <rect width="1200" height="900" fill="url(#grid)" opacity="0.5"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="1200" height="100" fill="url(#headerGrad)"/>
+  <text x="600" y="60" font-family="Georgia, serif" font-size="42" font-weight="bold" fill="#4ecca3" text-anchor="middle">Array Declaration Syntax</text>
+  <text x="600" y="88" font-family="Consolas, monospace" font-size="18" fill="#8892b0" text-anchor="middle">Three Ways to Create Arrays in C#</text>
+  
+  <!-- Method 1: Declare and Initialize -->
+  <g transform="translate(50, 130)">
+    <rect x="0" y="0" width="1100" height="200" rx="15" fill="#1a1a2e" stroke="#4ecca3" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="60" height="200" rx="15" fill="#4ecca3"/>
+    <rect x="30" y="0" width="30" height="200" fill="#4ecca3"/>
+    <text x="30" y="110" font-family="Georgia, serif" font-size="28" fill="#1a1a2e" text-anchor="middle" font-weight="bold" transform="rotate(-90, 30, 110)">1</text>
+    
+    <text x="100" y="40" font-family="Georgia, serif" font-size="22" fill="#4ecca3" font-weight="bold">Declare and Initialize (Most Common)</text>
+    
+    <!-- Syntax breakdown -->
+    <g transform="translate(100, 70)">
+      <rect x="0" y="0" width="60" height="40" rx="5" fill="url(#typeGrad)"/>
+      <text x="30" y="28" font-family="Consolas, monospace" font-size="18" fill="white" text-anchor="middle">int</text>
+      
+      <text x="75" y="28" font-family="Consolas, monospace" font-size="24" fill="#ccd6f6">[]</text>
+      
+      <rect x="110" y="0" width="100" height="40" rx="5" fill="#2d2d44"/>
+      <text x="160" y="28" font-family="Consolas, monospace" font-size="18" fill="#82aaff" text-anchor="middle">numbers</text>
+      
+      <text x="225" y="28" font-family="Consolas, monospace" font-size="24" fill="#ccd6f6">=</text>
+      
+      <text x="255" y="28" font-family="Consolas, monospace" font-size="24" fill="#e94560">{</text>
+      
+      <rect x="280" y="0" width="200" height="40" rx="5" fill="url(#valueGrad)"/>
+      <text x="380" y="28" font-family="Consolas, monospace" font-size="18" fill="#1a1a2e" text-anchor="middle">1, 2, 3, 4, 5</text>
+      
+      <text x="495" y="28" font-family="Consolas, monospace" font-size="24" fill="#e94560">}</text>
+      <text x="520" y="28" font-family="Consolas, monospace" font-size="24" fill="#ccd6f6">;</text>
+    </g>
+    
+    <!-- Labels -->
+    <g transform="translate(100, 130)">
+      <line x1="30" y1="0" x2="30" y2="25" stroke="#c792ea" stroke-width="2"/>
+      <text x="30" y="45" font-family="Georgia, serif" font-size="12" fill="#c792ea" text-anchor="middle">Data</text>
+      <text x="30" y="58" font-family="Georgia, serif" font-size="12" fill="#c792ea" text-anchor="middle">Type</text>
+      
+      <line x1="75" y1="0" x2="75" y2="25" stroke="#e94560" stroke-width="2"/>
+      <text x="75" y="45" font-family="Georgia, serif" font-size="12" fill="#e94560" text-anchor="middle">Array</text>
+      <text x="75" y="58" font-family="Georgia, serif" font-size="12" fill="#e94560" text-anchor="middle">Brackets</text>
+      
+      <line x1="160" y1="0" x2="160" y2="25" stroke="#82aaff" stroke-width="2"/>
+      <text x="160" y="45" font-family="Georgia, serif" font-size="12" fill="#82aaff" text-anchor="middle">Variable</text>
+      <text x="160" y="58" font-family="Georgia, serif" font-size="12" fill="#82aaff" text-anchor="middle">Name</text>
+      
+      <line x1="380" y1="0" x2="380" y2="25" stroke="#ffc107" stroke-width="2"/>
+      <text x="380" y="45" font-family="Georgia, serif" font-size="12" fill="#ffc107" text-anchor="middle">Initial Values</text>
+      <text x="380" y="58" font-family="Georgia, serif" font-size="12" fill="#ffc107" text-anchor="middle">(comma separated)</text>
+    </g>
+    
+    <!-- String example -->
+    <text x="650" y="95" font-family="Consolas, monospace" font-size="16" fill="#c792ea">string</text>
+    <text x="720" y="95" font-family="Consolas, monospace" font-size="16" fill="#ccd6f6">[] names = {</text>
+    <text x="850" y="95" font-family="Consolas, monospace" font-size="16" fill="#c3e88d">"Alice"</text>
+    <text x="920" y="95" font-family="Consolas, monospace" font-size="16" fill="#ccd6f6">,</text>
+    <text x="935" y="95" font-family="Consolas, monospace" font-size="16" fill="#c3e88d">"Bob"</text>
+    <text x="985" y="95" font-family="Consolas, monospace" font-size="16" fill="#ccd6f6">};</text>
+  </g>
+  
+  <!-- Method 2: Using new keyword -->
+  <g transform="translate(50, 350)">
+    <rect x="0" y="0" width="1100" height="200" rx="15" fill="#1a1a2e" stroke="#e94560" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="60" height="200" rx="15" fill="#e94560"/>
+    <rect x="30" y="0" width="30" height="200" fill="#e94560"/>
+    <text x="30" y="110" font-family="Georgia, serif" font-size="28" fill="white" text-anchor="middle" font-weight="bold" transform="rotate(-90, 30, 110)">2</text>
+    
+    <text x="100" y="40" font-family="Georgia, serif" font-size="22" fill="#e94560" font-weight="bold">Using 'new' Keyword (With Size)</text>
+    
+    <!-- Syntax breakdown -->
+    <g transform="translate(100, 70)">
+      <rect x="0" y="0" width="60" height="40" rx="5" fill="url(#typeGrad)"/>
+      <text x="30" y="28" font-family="Consolas, monospace" font-size="18" fill="white" text-anchor="middle">int</text>
+      
+      <text x="75" y="28" font-family="Consolas, monospace" font-size="24" fill="#ccd6f6">[]</text>
+      
+      <rect x="110" y="0" width="80" height="40" rx="5" fill="#2d2d44"/>
+      <text x="150" y="28" font-family="Consolas, monospace" font-size="18" fill="#82aaff" text-anchor="middle">scores</text>
+      
+      <text x="205" y="28" font-family="Consolas, monospace" font-size="24" fill="#ccd6f6">=</text>
+      
+      <rect x="230" y="0" width="55" height="40" rx="5" fill="url(#keywordGrad)"/>
+      <text x="258" y="28" font-family="Consolas, monospace" font-size="18" fill="white" text-anchor="middle">new</text>
+      
+      <rect x="300" y="0" width="50" height="40" rx="5" fill="url(#typeGrad)"/>
+      <text x="325" y="28" font-family="Consolas, monospace" font-size="18" fill="white" text-anchor="middle">int</text>
+      
+      <text x="365" y="28" font-family="Consolas, monospace" font-size="24" fill="#ccd6f6">[</text>
+      
+      <rect x="380" y="0" width="30" height="40" rx="5" fill="url(#valueGrad)"/>
+      <text x="395" y="28" font-family="Consolas, monospace" font-size="18" fill="#1a1a2e" text-anchor="middle">5</text>
+      
+      <text x="425" y="28" font-family="Consolas, monospace" font-size="24" fill="#ccd6f6">];</text>
+    </g>
+    
+    <!-- Labels -->
+    <g transform="translate(100, 130)">
+      <line x1="258" y1="0" x2="258" y2="25" stroke="#e94560" stroke-width="2"/>
+      <text x="258" y="45" font-family="Georgia, serif" font-size="12" fill="#e94560" text-anchor="middle">new</text>
+      <text x="258" y="58" font-family="Georgia, serif" font-size="12" fill="#e94560" text-anchor="middle">keyword</text>
+      
+      <line x1="395" y1="0" x2="395" y2="25" stroke="#ffc107" stroke-width="2"/>
+      <text x="395" y="45" font-family="Georgia, serif" font-size="12" fill="#ffc107" text-anchor="middle">Size</text>
+    </g>
+    
+    <!-- Note -->
+    <text x="550" y="95" font-family="Consolas, monospace" font-size="14" fill="#546e7a">// Creates array with 5 elements</text>
+    <text x="550" y="120" font-family="Consolas, monospace" font-size="14" fill="#546e7a">// All values default to 0 (for int)</text>
+    <text x="550" y="145" font-family="Consolas, monospace" font-size="14" fill="#546e7a">// Default values: int=0, string=null, bool=false</text>
+  </g>
+  
+  <!-- Method 3: new with values -->
+  <g transform="translate(50, 570)">
+    <rect x="0" y="0" width="1100" height="160" rx="15" fill="#1a1a2e" stroke="#7b68ee" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="60" height="160" rx="15" fill="#7b68ee"/>
+    <rect x="30" y="0" width="30" height="160" fill="#7b68ee"/>
+    <text x="30" y="90" font-family="Georgia, serif" font-size="28" fill="white" text-anchor="middle" font-weight="bold" transform="rotate(-90, 30, 90)">3</text>
+    
+    <text x="100" y="40" font-family="Georgia, serif" font-size="22" fill="#7b68ee" font-weight="bold">Using 'new' with Initializer (Explicit)</text>
+    
+    <!-- Syntax -->
+    <g transform="translate(100, 70)">
+      <text x="0" y="25" font-family="Consolas, monospace" font-size="18" fill="#c792ea">double</text>
+      <text x="70" y="25" font-family="Consolas, monospace" font-size="18" fill="#ccd6f6">[] prices =</text>
+      <text x="195" y="25" font-family="Consolas, monospace" font-size="18" fill="#e94560">new</text>
+      <text x="235" y="25" font-family="Consolas, monospace" font-size="18" fill="#c792ea">double</text>
+      <text x="305" y="25" font-family="Consolas, monospace" font-size="18" fill="#ccd6f6">[] {</text>
+      <text x="345" y="25" font-family="Consolas, monospace" font-size="18" fill="#ffc107">9.99, 19.99, 29.99</text>
+      <text x="540" y="25" font-family="Consolas, monospace" font-size="18" fill="#ccd6f6">};</text>
+    </g>
+    
+    <!-- Note -->
+    <text x="100" y="125" font-family="Consolas, monospace" font-size="14" fill="#546e7a">// Size is automatically determined from values (3 elements)</text>
+  </g>
+  
+  <!-- Common Data Types -->
+  <g transform="translate(50, 760)">
+    <rect x="0" y="0" width="1100" height="110" rx="15" fill="#1a1a2e" stroke="#ffc107" stroke-width="2" filter="url(#shadow)"/>
+    <text x="550" y="35" font-family="Georgia, serif" font-size="20" fill="#ffc107" text-anchor="middle" font-weight="bold">Common Array Data Types</text>
+    <line x1="100" y1="50" x2="1000" y2="50" stroke="#ffc107" stroke-width="1" opacity="0.5"/>
+    
+    <text x="120" y="80" font-family="Consolas, monospace" font-size="16" fill="#c792ea">int[]</text>
+    <text x="120" y="100" font-family="Georgia, serif" font-size="12" fill="#8892b0">whole numbers</text>
+    
+    <text x="280" y="80" font-family="Consolas, monospace" font-size="16" fill="#c792ea">double[]</text>
+    <text x="280" y="100" font-family="Georgia, serif" font-size="12" fill="#8892b0">decimals</text>
+    
+    <text x="440" y="80" font-family="Consolas, monospace" font-size="16" fill="#c792ea">string[]</text>
+    <text x="440" y="100" font-family="Georgia, serif" font-size="12" fill="#8892b0">text</text>
+    
+    <text x="600" y="80" font-family="Consolas, monospace" font-size="16" fill="#c792ea">bool[]</text>
+    <text x="600" y="100" font-family="Georgia, serif" font-size="12" fill="#8892b0">true/false</text>
+    
+    <text x="760" y="80" font-family="Consolas, monospace" font-size="16" fill="#c792ea">char[]</text>
+    <text x="760" y="100" font-family="Georgia, serif" font-size="12" fill="#8892b0">characters</text>
+    
+    <text x="920" y="80" font-family="Consolas, monospace" font-size="16" fill="#c792ea">object[]</text>
+    <text x="920" y="100" font-family="Georgia, serif" font-size="12" fill="#8892b0">anything</text>
+  </g>
+</svg>

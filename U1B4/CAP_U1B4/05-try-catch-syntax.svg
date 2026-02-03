@@ -1,0 +1,212 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+    <linearGradient id="tryGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4ecca3"/>
+      <stop offset="100%" style="stop-color:#3db389"/>
+    </linearGradient>
+    <linearGradient id="catchGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e94560"/>
+      <stop offset="100%" style="stop-color:#c73e54"/>
+    </linearGradient>
+    <linearGradient id="finallyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffc107"/>
+      <stop offset="100%" style="stop-color:#e5ad06"/>
+    </linearGradient>
+    <linearGradient id="codeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#7b68ee"/>
+      <stop offset="100%" style="stop-color:#6a5acd"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="900" fill="#0f0f1a"/>
+  
+  <!-- Grid pattern -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1a1a2e" stroke-width="1"/>
+  </pattern>
+  <rect width="1200" height="900" fill="url(#grid)" opacity="0.5"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="1200" height="100" fill="url(#headerGrad)"/>
+  <text x="600" y="60" font-family="Georgia, serif" font-size="42" font-weight="bold" fill="#4ecca3" text-anchor="middle">try-catch-finally Syntax</text>
+  <text x="600" y="88" font-family="Consolas, monospace" font-size="18" fill="#8892b0" text-anchor="middle">The Three Parts of Exception Handling</text>
+  
+  <!-- Flow diagram at top -->
+  <g transform="translate(100, 130)">
+    <!-- Try block -->
+    <rect x="0" y="0" width="200" height="100" rx="15" fill="url(#tryGrad)" filter="url(#shadow)"/>
+    <text x="100" y="35" font-family="Consolas, monospace" font-size="24" fill="#1a1a2e" text-anchor="middle" font-weight="bold">try</text>
+    <text x="100" y="60" font-family="Georgia, serif" font-size="14" fill="#1a1a2e" text-anchor="middle">"Attempt this</text>
+    <text x="100" y="78" font-family="Georgia, serif" font-size="14" fill="#1a1a2e" text-anchor="middle">risky code"</text>
+    
+    <!-- Arrow with condition -->
+    <line x1="200" y1="35" x2="330" y2="35" stroke="#e94560" stroke-width="3"/>
+    <text x="265" y="25" font-family="Georgia, serif" font-size="12" fill="#e94560" text-anchor="middle">error?</text>
+    <polygon points="330,35 320,30 320,40" fill="#e94560"/>
+    
+    <line x1="200" y1="70" x2="330" y2="70" stroke="#4ecca3" stroke-width="3"/>
+    <text x="265" y="88" font-family="Georgia, serif" font-size="12" fill="#4ecca3" text-anchor="middle">success</text>
+    <polygon points="330,70 320,65 320,75" fill="#4ecca3"/>
+    
+    <!-- Catch block -->
+    <rect x="330" y="0" width="200" height="60" rx="15" fill="url(#catchGrad)" filter="url(#shadow)"/>
+    <text x="430" y="28" font-family="Consolas, monospace" font-size="20" fill="white" text-anchor="middle" font-weight="bold">catch</text>
+    <text x="430" y="48" font-family="Georgia, serif" font-size="12" fill="#ffd6e0" text-anchor="middle">"Handle the error"</text>
+    
+    <!-- Skip line for success -->
+    <path d="M 330 70 Q 430 70 530 70" fill="none" stroke="#4ecca3" stroke-width="3"/>
+    
+    <!-- Both paths merge -->
+    <line x1="530" y1="35" x2="530" y2="70" stroke="#8892b0" stroke-width="2" stroke-dasharray="5,3"/>
+    
+    <!-- Arrow to finally -->
+    <line x1="530" y1="50" x2="570" y2="50" stroke="#ffc107" stroke-width="3"/>
+    <polygon points="570,50 560,45 560,55" fill="#ffc107"/>
+    
+    <!-- Finally block -->
+    <rect x="570" y="0" width="200" height="100" rx="15" fill="url(#finallyGrad)" filter="url(#shadow)"/>
+    <text x="670" y="35" font-family="Consolas, monospace" font-size="24" fill="#1a1a2e" text-anchor="middle" font-weight="bold">finally</text>
+    <text x="670" y="60" font-family="Georgia, serif" font-size="14" fill="#1a1a2e" text-anchor="middle">"Always runs"</text>
+    <text x="670" y="78" font-family="Georgia, serif" font-size="14" fill="#1a1a2e" text-anchor="middle">(cleanup)</text>
+    
+    <!-- Continue -->
+    <line x1="770" y1="50" x2="850" y2="50" stroke="#ccd6f6" stroke-width="3"/>
+    <polygon points="850,50 840,45 840,55" fill="#ccd6f6"/>
+    <rect x="850" y="25" width="130" height="50" rx="10" fill="#2d2d44"/>
+    <text x="915" y="55" font-family="Georgia, serif" font-size="14" fill="#ccd6f6" text-anchor="middle">Continue...</text>
+  </g>
+  
+  <!-- Code example - main syntax -->
+  <g transform="translate(50, 260)">
+    <rect x="0" y="0" width="550" height="400" rx="15" fill="#1a1a2e" stroke="#7b68ee" stroke-width="2" filter="url(#shadow)"/>
+    <text x="275" y="35" font-family="Georgia, serif" font-size="20" fill="#7b68ee" text-anchor="middle" font-weight="bold">Basic Syntax Structure</text>
+    <line x1="30" y1="50" x2="520" y2="50" stroke="#7b68ee" stroke-width="1" opacity="0.3"/>
+    
+    <!-- Code -->
+    <g transform="translate(30, 70)">
+      <!-- Try -->
+      <rect x="-10" y="-5" width="500" height="85" rx="5" fill="#4ecca3" opacity="0.1"/>
+      <text x="0" y="15" font-family="Consolas, monospace" font-size="15" fill="#4ecca3" font-weight="bold">try</text>
+      <text x="0" y="35" font-family="Consolas, monospace" font-size="15" fill="#ccd6f6">{</text>
+      <text x="20" y="55" font-family="Consolas, monospace" font-size="14" fill="#546e7a">// Code that might throw an exception</text>
+      <text x="20" y="75" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">int result = 10 / number;</text>
+      <text x="0" y="95" font-family="Consolas, monospace" font-size="15" fill="#ccd6f6">}</text>
+      
+      <!-- Catch -->
+      <rect x="-10" y="105" width="500" height="105" rx="5" fill="#e94560" opacity="0.1"/>
+      <text x="0" y="125" font-family="Consolas, monospace" font-size="15" fill="#e94560" font-weight="bold">catch</text>
+      <text x="45" y="125" font-family="Consolas, monospace" font-size="15" fill="#ccd6f6">(</text>
+      <text x="55" y="125" font-family="Consolas, monospace" font-size="15" fill="#c792ea">DivideByZeroException</text>
+      <text x="225" y="125" font-family="Consolas, monospace" font-size="15" fill="#82aaff">ex</text>
+      <text x="245" y="125" font-family="Consolas, monospace" font-size="15" fill="#ccd6f6">)</text>
+      <text x="0" y="145" font-family="Consolas, monospace" font-size="15" fill="#ccd6f6">{</text>
+      <text x="20" y="165" font-family="Consolas, monospace" font-size="14" fill="#546e7a">// Handle the specific error</text>
+      <text x="20" y="185" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">Console.WriteLine(</text>
+      <text x="180" y="185" font-family="Consolas, monospace" font-size="14" fill="#c3e88d">"Can't divide by zero!"</text>
+      <text x="385" y="185" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">);</text>
+      <text x="0" y="205" font-family="Consolas, monospace" font-size="15" fill="#ccd6f6">}</text>
+      
+      <!-- Finally -->
+      <rect x="-10" y="215" width="500" height="85" rx="5" fill="#ffc107" opacity="0.1"/>
+      <text x="0" y="235" font-family="Consolas, monospace" font-size="15" fill="#ffc107" font-weight="bold">finally</text>
+      <text x="55" y="235" font-family="Consolas, monospace" font-size="14" fill="#546e7a">// Optional</text>
+      <text x="0" y="255" font-family="Consolas, monospace" font-size="15" fill="#ccd6f6">{</text>
+      <text x="20" y="275" font-family="Consolas, monospace" font-size="14" fill="#546e7a">// Cleanup code - always runs</text>
+      <text x="20" y="295" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">Console.WriteLine(</text>
+      <text x="180" y="295" font-family="Consolas, monospace" font-size="14" fill="#c3e88d">"Done!"</text>
+      <text x="245" y="295" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">);</text>
+      <text x="0" y="315" font-family="Consolas, monospace" font-size="15" fill="#ccd6f6">}</text>
+    </g>
+  </g>
+  
+  <!-- Key parts explanation -->
+  <g transform="translate(620, 260)">
+    <rect x="0" y="0" width="530" height="180" rx="15" fill="#1a1a2e" stroke="#4ecca3" stroke-width="2" filter="url(#shadow)"/>
+    <text x="265" y="35" font-family="Georgia, serif" font-size="20" fill="#4ecca3" text-anchor="middle" font-weight="bold">Key Parts Explained</text>
+    <line x1="30" y1="50" x2="500" y2="50" stroke="#4ecca3" stroke-width="1" opacity="0.3"/>
+    
+    <text x="30" y="80" font-family="Consolas, monospace" font-size="14" fill="#4ecca3">try { }</text>
+    <text x="150" y="80" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">Code that might fail goes here</text>
+    
+    <text x="30" y="110" font-family="Consolas, monospace" font-size="14" fill="#e94560">catch (Type ex) { }</text>
+    <text x="200" y="110" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">Handle specific exception</text>
+    
+    <text x="30" y="140" font-family="Consolas, monospace" font-size="14" fill="#ffc107">finally { }</text>
+    <text x="150" y="140" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">Always runs (optional)</text>
+    
+    <text x="30" y="170" font-family="Consolas, monospace" font-size="14" fill="#82aaff">ex</text>
+    <text x="60" y="170" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">The exception object (has .Message)</text>
+  </g>
+  
+  <!-- Multiple catch blocks -->
+  <g transform="translate(620, 460)">
+    <rect x="0" y="0" width="530" height="200" rx="15" fill="#1a1a2e" stroke="#e94560" stroke-width="2" filter="url(#shadow)"/>
+    <text x="265" y="35" font-family="Georgia, serif" font-size="18" fill="#e94560" text-anchor="middle" font-weight="bold">Multiple Catch Blocks</text>
+    <line x1="30" y1="50" x2="500" y2="50" stroke="#e94560" stroke-width="1" opacity="0.3"/>
+    
+    <text x="30" y="75" font-family="Consolas, monospace" font-size="13" fill="#4ecca3">try</text>
+    <text x="55" y="75" font-family="Consolas, monospace" font-size="13" fill="#ccd6f6">{ ... }</text>
+    
+    <text x="30" y="100" font-family="Consolas, monospace" font-size="13" fill="#e94560">catch</text>
+    <text x="75" y="100" font-family="Consolas, monospace" font-size="13" fill="#ccd6f6">(</text>
+    <text x="85" y="100" font-family="Consolas, monospace" font-size="13" fill="#c792ea">FormatException</text>
+    <text x="205" y="100" font-family="Consolas, monospace" font-size="13" fill="#ccd6f6">) { ... }</text>
+    <text x="310" y="100" font-family="Georgia, serif" font-size="12" fill="#546e7a">// Most specific first</text>
+    
+    <text x="30" y="125" font-family="Consolas, monospace" font-size="13" fill="#e94560">catch</text>
+    <text x="75" y="125" font-family="Consolas, monospace" font-size="13" fill="#ccd6f6">(</text>
+    <text x="85" y="125" font-family="Consolas, monospace" font-size="13" fill="#c792ea">ArgumentException</text>
+    <text x="225" y="125" font-family="Consolas, monospace" font-size="13" fill="#ccd6f6">) { ... }</text>
+    
+    <text x="30" y="150" font-family="Consolas, monospace" font-size="13" fill="#e94560">catch</text>
+    <text x="75" y="150" font-family="Consolas, monospace" font-size="13" fill="#ccd6f6">(</text>
+    <text x="85" y="150" font-family="Consolas, monospace" font-size="13" fill="#c792ea">Exception</text>
+    <text x="165" y="150" font-family="Consolas, monospace" font-size="13" fill="#82aaff">ex</text>
+    <text x="185" y="150" font-family="Consolas, monospace" font-size="13" fill="#ccd6f6">) { ... }</text>
+    <text x="280" y="150" font-family="Georgia, serif" font-size="12" fill="#546e7a">// Catch-all (last!)</text>
+    
+    <text x="30" y="185" font-family="Georgia, serif" font-size="12" fill="#ffc107">⚠️ Order matters! Put specific exceptions before general ones.</text>
+  </g>
+  
+  <!-- Common Pattern -->
+  <g transform="translate(50, 680)">
+    <rect x="0" y="0" width="1100" height="180" rx="15" fill="#1a1a2e" stroke="#ffc107" stroke-width="2" filter="url(#shadow)"/>
+    <text x="550" y="35" font-family="Georgia, serif" font-size="20" fill="#ffc107" text-anchor="middle" font-weight="bold">🎯 Most Common Pattern: Catch-All with Message</text>
+    <line x1="50" y1="50" x2="1050" y2="50" stroke="#ffc107" stroke-width="1" opacity="0.3"/>
+    
+    <g transform="translate(50, 65)">
+      <text x="0" y="15" font-family="Consolas, monospace" font-size="14" fill="#4ecca3">try</text>
+      <text x="30" y="15" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">{</text>
+      
+      <text x="50" y="40" font-family="Consolas, monospace" font-size="14" fill="#546e7a">// Risky operation</text>
+      
+      <text x="0" y="65" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">}</text>
+      <text x="0" y="90" font-family="Consolas, monospace" font-size="14" fill="#e94560">catch</text>
+      <text x="45" y="90" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">(</text>
+      <text x="55" y="90" font-family="Consolas, monospace" font-size="14" fill="#c792ea">Exception</text>
+      <text x="130" y="90" font-family="Consolas, monospace" font-size="14" fill="#82aaff">ex</text>
+      <text x="150" y="90" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">)</text>
+      <text x="165" y="90" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">{</text>
+      <text x="185" y="90" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">Console.WriteLine(</text>
+      <text x="355" y="90" font-family="Consolas, monospace" font-size="14" fill="#c3e88d">$"Error: {ex.Message}"</text>
+      <text x="545" y="90" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">); }</text>
+    </g>
+    
+    <!-- Example output -->
+    <g transform="translate(650, 65)">
+      <rect x="0" y="0" width="400" height="100" rx="8" fill="#0f0f1a"/>
+      <text x="20" y="25" font-family="Georgia, serif" font-size="12" fill="#8892b0">Example output if divide by zero:</text>
+      <text x="20" y="55" font-family="Consolas, monospace" font-size="14" fill="#4ecca3">&gt;</text>
+      <text x="35" y="55" font-family="Consolas, monospace" font-size="14" fill="#e94560">Error: Attempted to divide by zero.</text>
+      <text x="20" y="85" font-family="Georgia, serif" font-size="12" fill="#4ecca3">✓ Program continues running!</text>
+    </g>
+  </g>
+</svg>

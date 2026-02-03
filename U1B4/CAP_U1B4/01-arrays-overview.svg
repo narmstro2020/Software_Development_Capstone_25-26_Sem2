@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+    <linearGradient id="arrayGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4ecca3"/>
+      <stop offset="100%" style="stop-color:#3db389"/>
+    </linearGradient>
+    <linearGradient id="indexGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e94560"/>
+      <stop offset="100%" style="stop-color:#c73e54"/>
+    </linearGradient>
+    <linearGradient id="valueGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#7b68ee"/>
+      <stop offset="100%" style="stop-color:#6a5acd"/>
+    </linearGradient>
+    <linearGradient id="memoryGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffc107"/>
+      <stop offset="100%" style="stop-color:#e5ad06"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="900" fill="#0f0f1a"/>
+  
+  <!-- Grid pattern -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1a1a2e" stroke-width="1"/>
+  </pattern>
+  <rect width="1200" height="900" fill="url(#grid)" opacity="0.5"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="1200" height="100" fill="url(#headerGrad)"/>
+  <text x="600" y="60" font-family="Georgia, serif" font-size="42" font-weight="bold" fill="#4ecca3" text-anchor="middle">C# Arrays</text>
+  <text x="600" y="88" font-family="Consolas, monospace" font-size="18" fill="#8892b0" text-anchor="middle">Storing Multiple Values in One Variable</text>
+  
+  <!-- Central Array Visualization -->
+  <g transform="translate(600, 280)">
+    <!-- Array container -->
+    <rect x="-350" y="-60" width="700" height="120" rx="15" fill="#1a1a2e" stroke="#4ecca3" stroke-width="3" filter="url(#shadow)"/>
+    
+    <!-- Array cells -->
+    <g transform="translate(-300, -40)">
+      <!-- Cell 0 -->
+      <rect x="0" y="0" width="100" height="80" rx="8" fill="url(#arrayGrad)"/>
+      <text x="50" y="-10" font-family="Consolas, monospace" font-size="16" fill="#e94560" text-anchor="middle">[0]</text>
+      <text x="50" y="50" font-family="Georgia, serif" font-size="28" fill="#1a1a2e" text-anchor="middle" font-weight="bold">42</text>
+      
+      <!-- Cell 1 -->
+      <rect x="120" y="0" width="100" height="80" rx="8" fill="url(#arrayGrad)"/>
+      <text x="170" y="-10" font-family="Consolas, monospace" font-size="16" fill="#e94560" text-anchor="middle">[1]</text>
+      <text x="170" y="50" font-family="Georgia, serif" font-size="28" fill="#1a1a2e" text-anchor="middle" font-weight="bold">17</text>
+      
+      <!-- Cell 2 -->
+      <rect x="240" y="0" width="100" height="80" rx="8" fill="url(#arrayGrad)"/>
+      <text x="290" y="-10" font-family="Consolas, monospace" font-size="16" fill="#e94560" text-anchor="middle">[2]</text>
+      <text x="290" y="50" font-family="Georgia, serif" font-size="28" fill="#1a1a2e" text-anchor="middle" font-weight="bold">89</text>
+      
+      <!-- Cell 3 -->
+      <rect x="360" y="0" width="100" height="80" rx="8" fill="url(#arrayGrad)"/>
+      <text x="410" y="-10" font-family="Consolas, monospace" font-size="16" fill="#e94560" text-anchor="middle">[3]</text>
+      <text x="410" y="50" font-family="Georgia, serif" font-size="28" fill="#1a1a2e" text-anchor="middle" font-weight="bold">5</text>
+      
+      <!-- Cell 4 -->
+      <rect x="480" y="0" width="100" height="80" rx="8" fill="url(#arrayGrad)"/>
+      <text x="530" y="-10" font-family="Consolas, monospace" font-size="16" fill="#e94560" text-anchor="middle">[4]</text>
+      <text x="530" y="50" font-family="Georgia, serif" font-size="28" fill="#1a1a2e" text-anchor="middle" font-weight="bold">63</text>
+    </g>
+    
+    <!-- Array name label -->
+    <text x="-400" y="10" font-family="Consolas, monospace" font-size="20" fill="#ffc107" font-weight="bold">numbers</text>
+  </g>
+  
+  <!-- What is an Array Box -->
+  <g transform="translate(100, 420)">
+    <rect x="0" y="0" width="480" height="220" rx="15" fill="#1a1a2e" stroke="#4ecca3" stroke-width="2" filter="url(#shadow)"/>
+    <text x="240" y="40" font-family="Georgia, serif" font-size="24" fill="#4ecca3" text-anchor="middle" font-weight="bold">What is an Array?</text>
+    <line x1="40" y1="55" x2="440" y2="55" stroke="#4ecca3" stroke-width="1" opacity="0.5"/>
+    
+    <circle cx="45" cy="95" r="8" fill="#4ecca3"/>
+    <text x="65" y="100" font-family="Georgia, serif" font-size="16" fill="#ccd6f6">A collection of values of the same type</text>
+    
+    <circle cx="45" cy="135" r="8" fill="#4ecca3"/>
+    <text x="65" y="140" font-family="Georgia, serif" font-size="16" fill="#ccd6f6">Fixed size - set when created</text>
+    
+    <circle cx="45" cy="175" r="8" fill="#4ecca3"/>
+    <text x="65" y="180" font-family="Georgia, serif" font-size="16" fill="#ccd6f6">Stored in contiguous memory</text>
+    
+    <circle cx="45" cy="215" r="8" fill="#4ecca3"/>
+    <text x="65" y="220" font-family="Georgia, serif" font-size="16" fill="#ccd6f6">Fast access by index position</text>
+  </g>
+  
+  <!-- Index Rules Box -->
+  <g transform="translate(620, 420)">
+    <rect x="0" y="0" width="480" height="220" rx="15" fill="#1a1a2e" stroke="#e94560" stroke-width="2" filter="url(#shadow)"/>
+    <text x="240" y="40" font-family="Georgia, serif" font-size="24" fill="#e94560" text-anchor="middle" font-weight="bold">Index Rules</text>
+    <line x1="40" y1="55" x2="440" y2="55" stroke="#e94560" stroke-width="1" opacity="0.5"/>
+    
+    <text x="30" y="95" font-family="Consolas, monospace" font-size="16" fill="#8892b0">1.</text>
+    <text x="55" y="95" font-family="Georgia, serif" font-size="16" fill="#ccd6f6">Indexes start at</text>
+    <text x="200" y="95" font-family="Consolas, monospace" font-size="18" fill="#ffc107" font-weight="bold">0</text>
+    <text x="220" y="95" font-family="Georgia, serif" font-size="16" fill="#ccd6f6">(not 1!)</text>
+    
+    <text x="30" y="135" font-family="Consolas, monospace" font-size="16" fill="#8892b0">2.</text>
+    <text x="55" y="135" font-family="Georgia, serif" font-size="16" fill="#ccd6f6">Last index is</text>
+    <text x="170" y="135" font-family="Consolas, monospace" font-size="18" fill="#ffc107" font-weight="bold">Length - 1</text>
+    
+    <text x="30" y="175" font-family="Consolas, monospace" font-size="16" fill="#8892b0">3.</text>
+    <text x="55" y="175" font-family="Georgia, serif" font-size="16" fill="#ccd6f6">Going out of bounds throws an</text>
+    <text x="55" y="200" font-family="Consolas, monospace" font-size="16" fill="#e94560">IndexOutOfRangeException</text>
+  </g>
+  
+  <!-- Code Example -->
+  <g transform="translate(100, 670)">
+    <rect x="0" y="0" width="1000" height="180" rx="15" fill="#1a1a2e" stroke="#7b68ee" stroke-width="2" filter="url(#shadow)"/>
+    <text x="500" y="35" font-family="Georgia, serif" font-size="20" fill="#7b68ee" text-anchor="middle" font-weight="bold">Quick Example</text>
+    <line x1="40" y1="50" x2="960" y2="50" stroke="#7b68ee" stroke-width="1" opacity="0.5"/>
+    
+    <text x="40" y="85" font-family="Consolas, monospace" font-size="16" fill="#c792ea">int</text>
+    <text x="75" y="85" font-family="Consolas, monospace" font-size="16" fill="#ccd6f6">[] numbers = { 42, 17, 89, 5, 63 };</text>
+    
+    <text x="40" y="115" font-family="Consolas, monospace" font-size="16" fill="#c792ea">int</text>
+    <text x="75" y="115" font-family="Consolas, monospace" font-size="16" fill="#ccd6f6"> first = numbers[</text>
+    <text x="235" y="115" font-family="Consolas, monospace" font-size="16" fill="#ffc107">0</text>
+    <text x="250" y="115" font-family="Consolas, monospace" font-size="16" fill="#ccd6f6">];</text>
+    <text x="280" y="115" font-family="Consolas, monospace" font-size="16" fill="#546e7a">// first = 42</text>
+    
+    <text x="40" y="145" font-family="Consolas, monospace" font-size="16" fill="#c792ea">int</text>
+    <text x="75" y="145" font-family="Consolas, monospace" font-size="16" fill="#ccd6f6"> last = numbers[numbers.Length - </text>
+    <text x="395" y="145" font-family="Consolas, monospace" font-size="16" fill="#ffc107">1</text>
+    <text x="410" y="145" font-family="Consolas, monospace" font-size="16" fill="#ccd6f6">];</text>
+    <text x="440" y="145" font-family="Consolas, monospace" font-size="16" fill="#546e7a">// last = 63</text>
+    
+    <!-- Array length indicator -->
+    <text x="600" y="85" font-family="Consolas, monospace" font-size="16" fill="#546e7a">// Length = 5</text>
+    <text x="600" y="115" font-family="Consolas, monospace" font-size="16" fill="#546e7a">// Valid indexes: 0, 1, 2, 3, 4</text>
+  </g>
+</svg>

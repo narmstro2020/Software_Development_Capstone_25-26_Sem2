@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager App - C# Activity</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            padding: 1.5rem;
+            color: #ccd6f6;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            color: #4ecca3;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #8892b0;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #2d2d44;
+        }
+
+        .card h2 {
+            color: #e94560;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card h3 {
+            color: #4ecca3;
+            margin: 1rem 0 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .skills-practiced {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-tag {
+            background: #2d2d44;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid #4ecca3;
+            color: #4ecca3;
+        }
+
+        .task-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .task-list li {
+            background: #0f0f1a;
+            margin-bottom: 0.75rem;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #7b68ee;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .task-list li.bonus {
+            border-left-color: #ffc107;
+            opacity: 0.9;
+        }
+
+        .task-number {
+            background: #7b68ee;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .task-list li.bonus .task-number {
+            background: #ffc107;
+            color: #1a1a2e;
+        }
+
+        .task-content {
+            flex: 1;
+        }
+
+        .task-content strong {
+            color: #ccd6f6;
+        }
+
+        .task-content p {
+            color: #8892b0;
+            margin-top: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        .code-hint {
+            background: #0f0f1a;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            margin-top: 0.5rem;
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            border: 1px solid #2d2d44;
+        }
+
+        .code-hint::before {
+            content: "💡 Hint: ";
+            color: #ffc107;
+        }
+
+        .example-output {
+            background: #0a0a12;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid #4ecca3;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9rem;
+            white-space: pre-line;
+        }
+
+        .example-output::before {
+            content: "Expected Console Output:";
+            display: block;
+            color: #4ecca3;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .prompt { color: #4ecca3; }
+        .output { color: #ccd6f6; }
+        .error { color: #e94560; }
+        .success { color: #4ecca3; }
+
+        .file-structure {
+            background: #0f0f1a;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9rem;
+        }
+
+        .file-structure .folder {
+            color: #ffc107;
+        }
+
+        .file-structure .file {
+            color: #4ecca3;
+            margin-left: 1.5rem;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: #8892b0;
+        }
+
+        .checklist li::before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            color: #4ecca3;
+            font-size: 1.2rem;
+        }
+
+        .reference-card {
+            background: #0f0f1a;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .reference-card h4 {
+            color: #7b68ee;
+            margin-bottom: 0.5rem;
+        }
+
+        .reference-card code {
+            display: block;
+            padding: 0.3rem 0;
+            color: #ccd6f6;
+        }
+
+        .reference-card .keyword { color: #c792ea; }
+        .reference-card .type { color: #c792ea; }
+        .reference-card .string { color: #c3e88d; }
+        .reference-card .method { color: #82aaff; }
+        .reference-card .comment { color: #546e7a; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📋 Task Manager App</h1>
+        <p class="subtitle">C# Activity: Arrays, Collections & Exception Handling</p>
+    </header>
+
+    <div class="container">
+        <!-- Overview -->
+        <div class="card">
+            <h2>🎯 Your Mission</h2>
+            <p>Build a console-based Task Manager application that lets users add, view, complete, and delete tasks. You'll practice using Lists, Dictionaries, and exception handling to create a robust application!</p>
+            
+            <div class="skills-practiced">
+                <span class="skill-tag">List&lt;T&gt;</span>
+                <span class="skill-tag">Dictionary&lt;K,V&gt;</span>
+                <span class="skill-tag">try-catch</span>
+                <span class="skill-tag">Input Validation</span>
+                <span class="skill-tag">Loops</span>
+            </div>
+
+            <h3>📁 Files You'll Work With</h3>
+            <div class="file-structure">
+                <div class="folder">📂 Activity/</div>
+                <div class="file">📄 activity-starter.cs - Your starting point (has TODOs)</div>
+                <div class="file">📄 activity.cs - Completed solution (don't peek!)</div>
+            </div>
+        </div>
+
+        <!-- Expected Output -->
+        <div class="card">
+            <h2>🖥️ What You're Building</h2>
+            <div class="example-output"><span class="output">═══════════════════════════════════════════
+          📋 TASK MANAGER
+═══════════════════════════════════════════
+
+What would you like to do?
+  1. Add a new task
+  2. View all tasks
+  3. Mark task as complete
+  4. Delete a task
+  5. View tasks by priority
+  6. Exit
+
+</span><span class="prompt">Enter choice (1-6): </span><span class="output">1
+
+</span><span class="prompt">Enter task description: </span><span class="output">Finish homework
+</span><span class="prompt">Enter priority (1=Low, 2=Medium, 3=High): </span><span class="output">3
+
+</span><span class="success">✅ Task added: "Finish homework" (Priority: High)</span></div>
+        </div>
+
+        <!-- Tasks -->
+        <div class="card">
+            <h2>✅ Tasks to Complete</h2>
+            <p style="margin-bottom: 1rem; color: #8892b0;">Find the <code>// TODO</code> comments in the starter file and implement each feature.</p>
+
+            <ul class="task-list">
+                <li>
+                    <span class="task-number">1</span>
+                    <div class="task-content">
+                        <strong>Initialize Collections</strong>
+                        <p>Create a List to store tasks and a Dictionary to map priority numbers to names.</p>
+                        <div class="code-hint">List&lt;Task&gt; tasks = new List&lt;Task&gt;();</div>
+                    </div>
+                </li>
+                <li>
+                    <span class="task-number">2</span>
+                    <div class="task-content">
+                        <strong>Add Task Method</strong>
+                        <p>Get user input for task description and priority. Validate the priority is 1-3. Create a new Task and add it to the list.</p>
+                        <div class="code-hint">Use int.TryParse() for safe number parsing</div>
+                    </div>
+                </li>
+                <li>
+                    <span class="task-number">3</span>
+                    <div class="task-content">
+                        <strong>View All Tasks</strong>
+                        <p>Loop through the tasks list and display each task with its ID, description, priority, and status.</p>
+                        <div class="code-hint">Use foreach or for loop. Check if list is empty first!</div>
+                    </div>
+                </li>
+                <li>
+                    <span class="task-number">4</span>
+                    <div class="task-content">
+                        <strong>Mark Task Complete</strong>
+                        <p>Ask for task ID, find the task, and set IsComplete = true. Handle invalid IDs with try-catch.</p>
+                        <div class="code-hint">tasks.FirstOrDefault(t => t.Id == id) or use a loop</div>
+                    </div>
+                </li>
+                <li>
+                    <span class="task-number">5</span>
+                    <div class="task-content">
+                        <strong>Delete Task</strong>
+                        <p>Ask for task ID and remove the task from the list. Handle the case where the task doesn't exist.</p>
+                        <div class="code-hint">list.RemoveAll(t => t.Id == id) returns count removed</div>
+                    </div>
+                </li>
+                <li>
+                    <span class="task-number">6</span>
+                    <div class="task-content">
+                        <strong>Menu Input Validation</strong>
+                        <p>Wrap the menu choice parsing in try-catch to handle non-numeric input gracefully.</p>
+                        <div class="code-hint">catch (FormatException) { ... }</div>
+                    </div>
+                </li>
+                <li class="bonus">
+                    <span class="task-number">⭐</span>
+                    <div class="task-content">
+                        <strong>BONUS: View by Priority</strong>
+                        <p>Filter and display only tasks with a specific priority level.</p>
+                        <div class="code-hint">tasks.Where(t => t.Priority == priority) or use a loop with if</div>
+                    </div>
+                </li>
+                <li class="bonus">
+                    <span class="task-number">⭐</span>
+                    <div class="task-content">
+                        <strong>BONUS: Task Statistics</strong>
+                        <p>Show total tasks, completed tasks, and tasks by priority count.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Reference -->
+        <div class="card">
+            <h2>📚 Quick Reference</h2>
+            
+            <div class="reference-card">
+                <h4>List Operations</h4>
+                <code><span class="type">List</span>&lt;Task&gt; tasks = <span class="keyword">new</span> <span class="type">List</span>&lt;Task&gt;();</code>
+                <code>tasks.<span class="method">Add</span>(newTask);          <span class="comment">// Add item</span></code>
+                <code>tasks.<span class="method">Remove</span>(task);          <span class="comment">// Remove item</span></code>
+                <code>tasks.<span class="method">RemoveAll</span>(t => t.Id == <span class="string">5</span>); <span class="comment">// Remove by condition</span></code>
+                <code>tasks.Count                   <span class="comment">// Number of items</span></code>
+            </div>
+
+            <div class="reference-card">
+                <h4>Dictionary Operations</h4>
+                <code><span class="type">Dictionary</span>&lt;<span class="type">int</span>, <span class="type">string</span>&gt; priorities = <span class="keyword">new</span> <span class="type">Dictionary</span>&lt;<span class="type">int</span>, <span class="type">string</span>&gt;</code>
+                <code>{</code>
+                <code>    { <span class="string">1</span>, <span class="string">"Low"</span> }, { <span class="string">2</span>, <span class="string">"Medium"</span> }, { <span class="string">3</span>, <span class="string">"High"</span> }</code>
+                <code>};</code>
+                <code>priorities[<span class="string">1</span>]                <span class="comment">// Returns "Low"</span></code>
+                <code>priorities.<span class="method">ContainsKey</span>(<span class="string">5</span>)    <span class="comment">// Returns false</span></code>
+            </div>
+
+            <div class="reference-card">
+                <h4>Exception Handling</h4>
+                <code><span class="keyword">try</span></code>
+                <code>{</code>
+                <code>    <span class="type">int</span> num = <span class="type">int</span>.<span class="method">Parse</span>(input);</code>
+                <code>}</code>
+                <code><span class="keyword">catch</span> (FormatException)</code>
+                <code>{</code>
+                <code>    Console.<span class="method">WriteLine</span>(<span class="string">"Invalid number!"</span>);</code>
+                <code>}</code>
+            </div>
+
+            <div class="reference-card">
+                <h4>Safe Parsing (Alternative)</h4>
+                <code><span class="keyword">if</span> (<span class="type">int</span>.<span class="method">TryParse</span>(input, <span class="keyword">out</span> <span class="type">int</span> result))</code>
+                <code>{</code>
+                <code>    <span class="comment">// Parsing succeeded, use 'result'</span></code>
+                <code>}</code>
+                <code><span class="keyword">else</span></code>
+                <code>{</code>
+                <code>    <span class="comment">// Parsing failed</span></code>
+                <code>}</code>
+            </div>
+        </div>
+
+        <!-- Checklist -->
+        <div class="card">
+            <h2>✔️ Completion Checklist</h2>
+            <ul class="checklist">
+                <li>Collections are initialized correctly</li>
+                <li>Can add new tasks with valid priorities</li>
+                <li>Invalid priority input shows error (doesn't crash)</li>
+                <li>Can view all tasks in a formatted list</li>
+                <li>Empty task list shows appropriate message</li>
+                <li>Can mark tasks as complete by ID</li>
+                <li>Invalid task ID shows error (doesn't crash)</li>
+                <li>Can delete tasks by ID</li>
+                <li>Menu handles invalid input gracefully</li>
+                <li>Exit option works correctly</li>
+            </ul>
+        </div>
+
+        <!-- Tips -->
+        <div class="card">
+            <h2>💡 Tips for Success</h2>
+            <ul style="padding-left: 1.5rem; color: #8892b0;">
+                <li style="margin-bottom: 0.5rem;">Start with TODO #1 and #2 - get adding tasks working first</li>
+                <li style="margin-bottom: 0.5rem;">Test frequently! Run your code after each change</li>
+                <li style="margin-bottom: 0.5rem;">When something doesn't work, read the error message carefully</li>
+                <li style="margin-bottom: 0.5rem;">Use the reference from guided notes if you get stuck</li>
+                <li style="margin-bottom: 0.5rem;">Don't peek at activity.cs unless you're really stuck!</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

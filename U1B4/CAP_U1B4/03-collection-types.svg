@@ -1,0 +1,251 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+    <linearGradient id="listGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4ecca3"/>
+      <stop offset="100%" style="stop-color:#3db389"/>
+    </linearGradient>
+    <linearGradient id="dictGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e94560"/>
+      <stop offset="100%" style="stop-color:#c73e54"/>
+    </linearGradient>
+    <linearGradient id="arrayGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#7b68ee"/>
+      <stop offset="100%" style="stop-color:#6a5acd"/>
+    </linearGradient>
+    <linearGradient id="queueGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffc107"/>
+      <stop offset="100%" style="stop-color:#e5ad06"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="900" fill="#0f0f1a"/>
+  
+  <!-- Grid pattern -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1a1a2e" stroke-width="1"/>
+  </pattern>
+  <rect width="1200" height="900" fill="url(#grid)" opacity="0.5"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="1200" height="100" fill="url(#headerGrad)"/>
+  <text x="600" y="60" font-family="Georgia, serif" font-size="42" font-weight="bold" fill="#4ecca3" text-anchor="middle">C# Collection Types</text>
+  <text x="600" y="88" font-family="Consolas, monospace" font-size="18" fill="#8892b0" text-anchor="middle">Beyond Arrays: Dynamic Collections from System.Collections.Generic</text>
+  
+  <!-- Array vs List comparison header -->
+  <g transform="translate(50, 120)">
+    <rect x="0" y="0" width="540" height="50" rx="10" fill="#7b68ee" filter="url(#shadow)"/>
+    <text x="270" y="33" font-family="Georgia, serif" font-size="22" fill="white" text-anchor="middle" font-weight="bold">Array (Fixed Size)</text>
+    
+    <rect x="560" y="0" width="540" height="50" rx="10" fill="#4ecca3" filter="url(#shadow)"/>
+    <text x="830" y="33" font-family="Georgia, serif" font-size="22" fill="#1a1a2e" text-anchor="middle" font-weight="bold">List&lt;T&gt; (Dynamic Size)</text>
+  </g>
+  
+  <!-- Array Box -->
+  <g transform="translate(50, 185)">
+    <rect x="0" y="0" width="540" height="260" rx="15" fill="#1a1a2e" stroke="#7b68ee" stroke-width="2" filter="url(#shadow)"/>
+    
+    <!-- Array visual -->
+    <g transform="translate(30, 30)">
+      <rect x="0" y="0" width="70" height="50" rx="5" fill="url(#arrayGrad)"/>
+      <text x="35" y="32" font-family="Consolas, monospace" font-size="18" fill="white" text-anchor="middle">A</text>
+      <rect x="75" y="0" width="70" height="50" rx="5" fill="url(#arrayGrad)"/>
+      <text x="110" y="32" font-family="Consolas, monospace" font-size="18" fill="white" text-anchor="middle">B</text>
+      <rect x="150" y="0" width="70" height="50" rx="5" fill="url(#arrayGrad)"/>
+      <text x="185" y="32" font-family="Consolas, monospace" font-size="18" fill="white" text-anchor="middle">C</text>
+      <rect x="225" y="0" width="70" height="50" rx="5" fill="#2d2d44" stroke="#7b68ee" stroke-width="2" stroke-dasharray="5,5"/>
+      <text x="260" y="32" font-family="Consolas, monospace" font-size="14" fill="#546e7a" text-anchor="middle">fixed</text>
+    </g>
+    
+    <text x="30" y="115" font-family="Consolas, monospace" font-size="14" fill="#c792ea">string</text>
+    <text x="80" y="115" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">[] letters =</text>
+    <text x="195" y="115" font-family="Consolas, monospace" font-size="14" fill="#e94560">new</text>
+    <text x="225" y="115" font-family="Consolas, monospace" font-size="14" fill="#c792ea">string</text>
+    <text x="280" y="115" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">[3];</text>
+    
+    <line x1="30" y1="135" x2="510" y2="135" stroke="#7b68ee" stroke-width="1" opacity="0.3"/>
+    
+    <text x="30" y="165" font-family="Georgia, serif" font-size="14" fill="#e94560">✗</text>
+    <text x="50" y="165" font-family="Georgia, serif" font-size="14" fill="#8892b0">Cannot add more items</text>
+    
+    <text x="30" y="195" font-family="Georgia, serif" font-size="14" fill="#e94560">✗</text>
+    <text x="50" y="195" font-family="Georgia, serif" font-size="14" fill="#8892b0">Cannot remove items</text>
+    
+    <text x="30" y="225" font-family="Georgia, serif" font-size="14" fill="#4ecca3">✓</text>
+    <text x="50" y="225" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">Fastest access by index</text>
+    
+    <text x="300" y="165" font-family="Georgia, serif" font-size="14" fill="#4ecca3">✓</text>
+    <text x="320" y="165" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">Use .Length property</text>
+    
+    <text x="300" y="195" font-family="Georgia, serif" font-size="14" fill="#4ecca3">✓</text>
+    <text x="320" y="195" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">Best when size is known</text>
+  </g>
+  
+  <!-- List Box -->
+  <g transform="translate(610, 185)">
+    <rect x="0" y="0" width="540" height="260" rx="15" fill="#1a1a2e" stroke="#4ecca3" stroke-width="2" filter="url(#shadow)"/>
+    
+    <!-- List visual -->
+    <g transform="translate(30, 30)">
+      <rect x="0" y="0" width="70" height="50" rx="5" fill="url(#listGrad)"/>
+      <text x="35" y="32" font-family="Consolas, monospace" font-size="18" fill="#1a1a2e" text-anchor="middle">A</text>
+      <rect x="75" y="0" width="70" height="50" rx="5" fill="url(#listGrad)"/>
+      <text x="110" y="32" font-family="Consolas, monospace" font-size="18" fill="#1a1a2e" text-anchor="middle">B</text>
+      <rect x="150" y="0" width="70" height="50" rx="5" fill="url(#listGrad)"/>
+      <text x="185" y="32" font-family="Consolas, monospace" font-size="18" fill="#1a1a2e" text-anchor="middle">C</text>
+      <text x="235" y="32" font-family="Georgia, serif" font-size="24" fill="#4ecca3">→</text>
+      <rect x="260" y="0" width="70" height="50" rx="5" fill="#4ecca3" opacity="0.4" stroke="#4ecca3" stroke-width="2"/>
+      <text x="295" y="32" font-family="Consolas, monospace" font-size="18" fill="#4ecca3" text-anchor="middle">+</text>
+    </g>
+    
+    <text x="30" y="115" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">List&lt;</text>
+    <text x="70" y="115" font-family="Consolas, monospace" font-size="14" fill="#c792ea">string</text>
+    <text x="120" y="115" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">&gt; letters =</text>
+    <text x="235" y="115" font-family="Consolas, monospace" font-size="14" fill="#e94560">new</text>
+    <text x="270" y="115" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">List&lt;</text>
+    <text x="310" y="115" font-family="Consolas, monospace" font-size="14" fill="#c792ea">string</text>
+    <text x="360" y="115" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">&gt;();</text>
+    
+    <line x1="30" y1="135" x2="510" y2="135" stroke="#4ecca3" stroke-width="1" opacity="0.3"/>
+    
+    <text x="30" y="165" font-family="Georgia, serif" font-size="14" fill="#4ecca3">✓</text>
+    <text x="50" y="165" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">.Add(item)</text>
+    <text x="155" y="165" font-family="Georgia, serif" font-size="14" fill="#8892b0">- append item</text>
+    
+    <text x="30" y="195" font-family="Georgia, serif" font-size="14" fill="#4ecca3">✓</text>
+    <text x="50" y="195" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">.Remove(item)</text>
+    <text x="185" y="195" font-family="Georgia, serif" font-size="14" fill="#8892b0">- delete item</text>
+    
+    <text x="30" y="225" font-family="Georgia, serif" font-size="14" fill="#4ecca3">✓</text>
+    <text x="50" y="225" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">.Count</text>
+    <text x="115" y="225" font-family="Georgia, serif" font-size="14" fill="#8892b0">- number of items</text>
+    
+    <text x="300" y="165" font-family="Georgia, serif" font-size="14" fill="#4ecca3">✓</text>
+    <text x="320" y="165" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">.Insert(idx, item)</text>
+    
+    <text x="300" y="195" font-family="Georgia, serif" font-size="14" fill="#4ecca3">✓</text>
+    <text x="320" y="195" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">.Contains(item)</text>
+    
+    <text x="300" y="225" font-family="Georgia, serif" font-size="14" fill="#4ecca3">✓</text>
+    <text x="320" y="225" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">.Clear()</text>
+  </g>
+  
+  <!-- Dictionary Section -->
+  <g transform="translate(50, 470)">
+    <rect x="0" y="0" width="540" height="280" rx="15" fill="#1a1a2e" stroke="#e94560" stroke-width="2" filter="url(#shadow)"/>
+    
+    <text x="270" y="35" font-family="Georgia, serif" font-size="22" fill="#e94560" text-anchor="middle" font-weight="bold">Dictionary&lt;TKey, TValue&gt;</text>
+    <text x="270" y="55" font-family="Georgia, serif" font-size="14" fill="#8892b0" text-anchor="middle">Key-Value Pairs (like a real dictionary!)</text>
+    
+    <line x1="30" y1="70" x2="510" y2="70" stroke="#e94560" stroke-width="1" opacity="0.3"/>
+    
+    <!-- Dictionary visual -->
+    <g transform="translate(30, 90)">
+      <rect x="0" y="0" width="100" height="35" rx="5" fill="url(#dictGrad)"/>
+      <text x="50" y="24" font-family="Consolas, monospace" font-size="14" fill="white" text-anchor="middle">"apple"</text>
+      <text x="115" y="24" font-family="Georgia, serif" font-size="18" fill="#8892b0">→</text>
+      <rect x="135" y="0" width="60" height="35" rx="5" fill="url(#queueGrad)"/>
+      <text x="165" y="24" font-family="Consolas, monospace" font-size="16" fill="#1a1a2e" text-anchor="middle">1.99</text>
+      
+      <rect x="0" y="45" width="100" height="35" rx="5" fill="url(#dictGrad)"/>
+      <text x="50" y="69" font-family="Consolas, monospace" font-size="14" fill="white" text-anchor="middle">"bread"</text>
+      <text x="115" y="69" font-family="Georgia, serif" font-size="18" fill="#8892b0">→</text>
+      <rect x="135" y="45" width="60" height="35" rx="5" fill="url(#queueGrad)"/>
+      <text x="165" y="69" font-family="Consolas, monospace" font-size="16" fill="#1a1a2e" text-anchor="middle">3.49</text>
+      
+      <text x="220" y="24" font-family="Georgia, serif" font-size="12" fill="#8892b0">Key</text>
+      <text x="220" y="44" font-family="Georgia, serif" font-size="12" fill="#8892b0">(unique)</text>
+      
+      <text x="280" y="24" font-family="Georgia, serif" font-size="12" fill="#8892b0">Value</text>
+    </g>
+    
+    <!-- Code example -->
+    <text x="30" y="210" font-family="Consolas, monospace" font-size="13" fill="#ccd6f6">Dictionary&lt;</text>
+    <text x="130" y="210" font-family="Consolas, monospace" font-size="13" fill="#c792ea">string</text>
+    <text x="175" y="210" font-family="Consolas, monospace" font-size="13" fill="#ccd6f6">,</text>
+    <text x="185" y="210" font-family="Consolas, monospace" font-size="13" fill="#c792ea">double</text>
+    <text x="240" y="210" font-family="Consolas, monospace" font-size="13" fill="#ccd6f6">&gt; prices =</text>
+    <text x="30" y="230" font-family="Consolas, monospace" font-size="13" fill="#ccd6f6">    </text>
+    <text x="50" y="230" font-family="Consolas, monospace" font-size="13" fill="#e94560">new</text>
+    <text x="80" y="230" font-family="Consolas, monospace" font-size="13" fill="#ccd6f6">Dictionary&lt;</text>
+    <text x="175" y="230" font-family="Consolas, monospace" font-size="13" fill="#c792ea">string</text>
+    <text x="220" y="230" font-family="Consolas, monospace" font-size="13" fill="#ccd6f6">,</text>
+    <text x="230" y="230" font-family="Consolas, monospace" font-size="13" fill="#c792ea">double</text>
+    <text x="285" y="230" font-family="Consolas, monospace" font-size="13" fill="#ccd6f6">&gt;();</text>
+    
+    <text x="30" y="255" font-family="Consolas, monospace" font-size="13" fill="#ccd6f6">prices[</text>
+    <text x="85" y="255" font-family="Consolas, monospace" font-size="13" fill="#c3e88d">"apple"</text>
+    <text x="145" y="255" font-family="Consolas, monospace" font-size="13" fill="#ccd6f6">] =</text>
+    <text x="175" y="255" font-family="Consolas, monospace" font-size="13" fill="#ffc107">1.99</text>
+    <text x="210" y="255" font-family="Consolas, monospace" font-size="13" fill="#ccd6f6">;</text>
+    <text x="230" y="255" font-family="Consolas, monospace" font-size="13" fill="#546e7a">// Add/update</text>
+    
+    <!-- Methods -->
+    <text x="350" y="100" font-family="Consolas, monospace" font-size="12" fill="#4ecca3">.Add(key, value)</text>
+    <text x="350" y="125" font-family="Consolas, monospace" font-size="12" fill="#4ecca3">.Remove(key)</text>
+    <text x="350" y="150" font-family="Consolas, monospace" font-size="12" fill="#4ecca3">.ContainsKey(key)</text>
+    <text x="350" y="175" font-family="Consolas, monospace" font-size="12" fill="#4ecca3">.TryGetValue()</text>
+  </g>
+  
+  <!-- Other Collections -->
+  <g transform="translate(610, 470)">
+    <rect x="0" y="0" width="540" height="280" rx="15" fill="#1a1a2e" stroke="#ffc107" stroke-width="2" filter="url(#shadow)"/>
+    
+    <text x="270" y="35" font-family="Georgia, serif" font-size="22" fill="#ffc107" text-anchor="middle" font-weight="bold">Other Useful Collections</text>
+    
+    <line x1="30" y1="55" x2="510" y2="55" stroke="#ffc107" stroke-width="1" opacity="0.3"/>
+    
+    <!-- HashSet -->
+    <rect x="30" y="70" width="230" height="90" rx="10" fill="#2d2d44"/>
+    <text x="145" y="95" font-family="Consolas, monospace" font-size="16" fill="#4ecca3" text-anchor="middle">HashSet&lt;T&gt;</text>
+    <text x="145" y="115" font-family="Georgia, serif" font-size="12" fill="#8892b0" text-anchor="middle">Unique values only</text>
+    <text x="145" y="135" font-family="Georgia, serif" font-size="12" fill="#8892b0" text-anchor="middle">Fast lookup, no duplicates</text>
+    <text x="145" y="152" font-family="Consolas, monospace" font-size="11" fill="#ccd6f6" text-anchor="middle">{1, 2, 3} + 2 = {1, 2, 3}</text>
+    
+    <!-- Queue -->
+    <rect x="280" y="70" width="230" height="90" rx="10" fill="#2d2d44"/>
+    <text x="395" y="95" font-family="Consolas, monospace" font-size="16" fill="#e94560" text-anchor="middle">Queue&lt;T&gt;</text>
+    <text x="395" y="115" font-family="Georgia, serif" font-size="12" fill="#8892b0" text-anchor="middle">First In, First Out (FIFO)</text>
+    <text x="395" y="135" font-family="Georgia, serif" font-size="12" fill="#8892b0" text-anchor="middle">Like a line at a store</text>
+    <text x="395" y="152" font-family="Consolas, monospace" font-size="11" fill="#ccd6f6" text-anchor="middle">.Enqueue() .Dequeue()</text>
+    
+    <!-- Stack -->
+    <rect x="30" y="175" width="230" height="90" rx="10" fill="#2d2d44"/>
+    <text x="145" y="200" font-family="Consolas, monospace" font-size="16" fill="#7b68ee" text-anchor="middle">Stack&lt;T&gt;</text>
+    <text x="145" y="220" font-family="Georgia, serif" font-size="12" fill="#8892b0" text-anchor="middle">Last In, First Out (LIFO)</text>
+    <text x="145" y="240" font-family="Georgia, serif" font-size="12" fill="#8892b0" text-anchor="middle">Like a stack of plates</text>
+    <text x="145" y="257" font-family="Consolas, monospace" font-size="11" fill="#ccd6f6" text-anchor="middle">.Push() .Pop() .Peek()</text>
+    
+    <!-- Remember box -->
+    <rect x="280" y="175" width="230" height="90" rx="10" fill="#1a1a2e" stroke="#4ecca3" stroke-width="2"/>
+    <text x="395" y="200" font-family="Georgia, serif" font-size="14" fill="#4ecca3" text-anchor="middle" font-weight="bold">💡 Remember</text>
+    <text x="395" y="225" font-family="Georgia, serif" font-size="12" fill="#ccd6f6" text-anchor="middle">Add this at the top:</text>
+    <text x="395" y="250" font-family="Consolas, monospace" font-size="11" fill="#c792ea" text-anchor="middle">using System.Collections.Generic;</text>
+  </g>
+  
+  <!-- Bottom tip -->
+  <g transform="translate(50, 770)">
+    <rect x="0" y="0" width="1100" height="100" rx="15" fill="#1a1a2e" stroke="#4ecca3" stroke-width="2" filter="url(#shadow)"/>
+    <text x="550" y="35" font-family="Georgia, serif" font-size="20" fill="#4ecca3" text-anchor="middle" font-weight="bold">🎯 Quick Decision Guide</text>
+    <line x1="100" y1="50" x2="1000" y2="50" stroke="#4ecca3" stroke-width="1" opacity="0.3"/>
+    
+    <text x="150" y="75" font-family="Georgia, serif" font-size="14" fill="#ccd6f6" text-anchor="middle">Fixed size known?</text>
+    <text x="150" y="92" font-family="Consolas, monospace" font-size="14" fill="#7b68ee" text-anchor="middle">→ Array</text>
+    
+    <text x="400" y="75" font-family="Georgia, serif" font-size="14" fill="#ccd6f6" text-anchor="middle">Need to add/remove?</text>
+    <text x="400" y="92" font-family="Consolas, monospace" font-size="14" fill="#4ecca3" text-anchor="middle">→ List&lt;T&gt;</text>
+    
+    <text x="650" y="75" font-family="Georgia, serif" font-size="14" fill="#ccd6f6" text-anchor="middle">Key-value lookup?</text>
+    <text x="650" y="92" font-family="Consolas, monospace" font-size="14" fill="#e94560" text-anchor="middle">→ Dictionary</text>
+    
+    <text x="900" y="75" font-family="Georgia, serif" font-size="14" fill="#ccd6f6" text-anchor="middle">No duplicates?</text>
+    <text x="900" y="92" font-family="Consolas, monospace" font-size="14" fill="#ffc107" text-anchor="middle">→ HashSet</text>
+  </g>
+</svg>

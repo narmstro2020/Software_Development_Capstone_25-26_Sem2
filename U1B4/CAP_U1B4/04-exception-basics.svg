@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+    <linearGradient id="errorGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e94560"/>
+      <stop offset="100%" style="stop-color:#c73e54"/>
+    </linearGradient>
+    <linearGradient id="successGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4ecca3"/>
+      <stop offset="100%" style="stop-color:#3db389"/>
+    </linearGradient>
+    <linearGradient id="warningGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffc107"/>
+      <stop offset="100%" style="stop-color:#e5ad06"/>
+    </linearGradient>
+    <linearGradient id="codeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#7b68ee"/>
+      <stop offset="100%" style="stop-color:#6a5acd"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="900" fill="#0f0f1a"/>
+  
+  <!-- Grid pattern -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1a1a2e" stroke-width="1"/>
+  </pattern>
+  <rect width="1200" height="900" fill="url(#grid)" opacity="0.5"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="1200" height="100" fill="url(#headerGrad)"/>
+  <text x="600" y="60" font-family="Georgia, serif" font-size="42" font-weight="bold" fill="#e94560" text-anchor="middle">Exception Handling</text>
+  <text x="600" y="88" font-family="Consolas, monospace" font-size="18" fill="#8892b0" text-anchor="middle">What Happens When Things Go Wrong?</text>
+  
+  <!-- Central concept: What is an Exception -->
+  <g transform="translate(600, 200)">
+    <circle cx="0" cy="0" r="85" fill="url(#errorGrad)" filter="url(#shadow)"/>
+    <text x="0" y="-20" font-family="Georgia, serif" font-size="22" fill="white" text-anchor="middle" font-weight="bold">EXCEPTION</text>
+    <text x="0" y="5" font-family="Consolas, monospace" font-size="12" fill="#ffd6e0" text-anchor="middle">"Something went</text>
+    <text x="0" y="22" font-family="Consolas, monospace" font-size="12" fill="#ffd6e0" text-anchor="middle">wrong at runtime!"</text>
+    <text x="0" y="50" font-family="Georgia, serif" font-size="28" fill="white" text-anchor="middle">⚠️</text>
+  </g>
+  
+  <!-- Without handling -->
+  <g transform="translate(200, 180)">
+    <rect x="-130" y="-50" width="260" height="100" rx="15" fill="#1a1a2e" stroke="#e94560" stroke-width="2" filter="url(#shadow)"/>
+    <text x="0" y="-20" font-family="Georgia, serif" font-size="18" fill="#e94560" text-anchor="middle" font-weight="bold">Without Handling</text>
+    <text x="0" y="5" font-family="Georgia, serif" font-size="14" fill="#ccd6f6" text-anchor="middle">Program crashes!</text>
+    <text x="0" y="25" font-family="Georgia, serif" font-size="14" fill="#8892b0" text-anchor="middle">User sees scary error</text>
+    <text x="0" y="40" font-family="Georgia, serif" font-size="20" fill="#e94560" text-anchor="middle">💀</text>
+    
+    <!-- Arrow -->
+    <line x1="135" y1="0" x2="210" y2="0" stroke="#e94560" stroke-width="3" stroke-dasharray="8,4"/>
+  </g>
+  
+  <!-- With handling -->
+  <g transform="translate(1000, 180)">
+    <rect x="-130" y="-50" width="260" height="100" rx="15" fill="#1a1a2e" stroke="#4ecca3" stroke-width="2" filter="url(#shadow)"/>
+    <text x="0" y="-20" font-family="Georgia, serif" font-size="18" fill="#4ecca3" text-anchor="middle" font-weight="bold">With Handling</text>
+    <text x="0" y="5" font-family="Georgia, serif" font-size="14" fill="#ccd6f6" text-anchor="middle">Program recovers!</text>
+    <text x="0" y="25" font-family="Georgia, serif" font-size="14" fill="#8892b0" text-anchor="middle">Graceful error message</text>
+    <text x="0" y="40" font-family="Georgia, serif" font-size="20" fill="#4ecca3" text-anchor="middle">✅</text>
+    
+    <!-- Arrow -->
+    <line x1="-135" y1="0" x2="-210" y2="0" stroke="#4ecca3" stroke-width="3" stroke-dasharray="8,4"/>
+  </g>
+  
+  <!-- Common Exceptions Box -->
+  <g transform="translate(50, 320)">
+    <rect x="0" y="0" width="520" height="340" rx="15" fill="#1a1a2e" stroke="#e94560" stroke-width="2" filter="url(#shadow)"/>
+    <text x="260" y="40" font-family="Georgia, serif" font-size="22" fill="#e94560" text-anchor="middle" font-weight="bold">Common Exceptions You'll See</text>
+    <line x1="30" y1="55" x2="490" y2="55" stroke="#e94560" stroke-width="1" opacity="0.5"/>
+    
+    <!-- Exception list -->
+    <g transform="translate(30, 75)">
+      <rect x="0" y="0" width="460" height="45" rx="8" fill="#2d2d44"/>
+      <text x="15" y="20" font-family="Consolas, monospace" font-size="13" fill="#ffc107">NullReferenceException</text>
+      <text x="15" y="37" font-family="Georgia, serif" font-size="11" fill="#8892b0">Trying to use something that is null</text>
+      
+      <rect x="0" y="55" width="460" height="45" rx="8" fill="#2d2d44"/>
+      <text x="15" y="75" font-family="Consolas, monospace" font-size="13" fill="#ffc107">IndexOutOfRangeException</text>
+      <text x="15" y="92" font-family="Georgia, serif" font-size="11" fill="#8892b0">Array index doesn't exist (e.g., index 10 in size-5 array)</text>
+      
+      <rect x="0" y="110" width="460" height="45" rx="8" fill="#2d2d44"/>
+      <text x="15" y="130" font-family="Consolas, monospace" font-size="13" fill="#ffc107">FormatException</text>
+      <text x="15" y="147" font-family="Georgia, serif" font-size="11" fill="#8892b0">Can't convert string to number (e.g., int.Parse("hello"))</text>
+      
+      <rect x="0" y="165" width="460" height="45" rx="8" fill="#2d2d44"/>
+      <text x="15" y="185" font-family="Consolas, monospace" font-size="13" fill="#ffc107">DivideByZeroException</text>
+      <text x="15" y="202" font-family="Georgia, serif" font-size="11" fill="#8892b0">Dividing an integer by zero</text>
+      
+      <rect x="0" y="220" width="460" height="45" rx="8" fill="#2d2d44"/>
+      <text x="15" y="240" font-family="Consolas, monospace" font-size="13" fill="#ffc107">FileNotFoundException</text>
+      <text x="15" y="257" font-family="Georgia, serif" font-size="11" fill="#8892b0">File doesn't exist at specified path</text>
+    </g>
+  </g>
+  
+  <!-- Example without handling -->
+  <g transform="translate(610, 320)">
+    <rect x="0" y="0" width="540" height="160" rx="15" fill="#1a1a2e" stroke="#7b68ee" stroke-width="2" filter="url(#shadow)"/>
+    <text x="270" y="35" font-family="Georgia, serif" font-size="18" fill="#7b68ee" text-anchor="middle" font-weight="bold">💥 Code That Will Crash</text>
+    <line x1="30" y1="50" x2="510" y2="50" stroke="#7b68ee" stroke-width="1" opacity="0.3"/>
+    
+    <text x="30" y="80" font-family="Consolas, monospace" font-size="14" fill="#c792ea">int</text>
+    <text x="60" y="80" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">[] numbers = { 1, 2, 3 };</text>
+    
+    <text x="30" y="105" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">Console.WriteLine(numbers[</text>
+    <text x="265" y="105" font-family="Consolas, monospace" font-size="14" fill="#e94560">10</text>
+    <text x="285" y="105" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">]);</text>
+    
+    <text x="30" y="130" font-family="Consolas, monospace" font-size="13" fill="#e94560">// 💀 IndexOutOfRangeException!</text>
+    <text x="30" y="150" font-family="Consolas, monospace" font-size="13" fill="#e94560">// Program crashes, code after never runs</text>
+  </g>
+  
+  <!-- Why it matters -->
+  <g transform="translate(610, 500)">
+    <rect x="0" y="0" width="540" height="160" rx="15" fill="#1a1a2e" stroke="#4ecca3" stroke-width="2" filter="url(#shadow)"/>
+    <text x="270" y="35" font-family="Georgia, serif" font-size="18" fill="#4ecca3" text-anchor="middle" font-weight="bold">Why Exception Handling Matters</text>
+    <line x1="30" y1="50" x2="510" y2="50" stroke="#4ecca3" stroke-width="1" opacity="0.3"/>
+    
+    <circle cx="50" cy="80" r="8" fill="#4ecca3"/>
+    <text x="70" y="85" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">Prevent crashes from user input errors</text>
+    
+    <circle cx="50" cy="110" r="8" fill="#4ecca3"/>
+    <text x="70" y="115" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">Show friendly error messages to users</text>
+    
+    <circle cx="50" cy="140" r="8" fill="#4ecca3"/>
+    <text x="70" y="145" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">Log errors for debugging later</text>
+  </g>
+  
+  <!-- Real world analogy -->
+  <g transform="translate(50, 690)">
+    <rect x="0" y="0" width="1100" height="170" rx="15" fill="#1a1a2e" stroke="#ffc107" stroke-width="2" filter="url(#shadow)"/>
+    <text x="550" y="40" font-family="Georgia, serif" font-size="22" fill="#ffc107" text-anchor="middle" font-weight="bold">🏠 Real World Analogy</text>
+    <line x1="100" y1="55" x2="1000" y2="55" stroke="#ffc107" stroke-width="1" opacity="0.3"/>
+    
+    <!-- Without -->
+    <g transform="translate(50, 75)">
+      <text x="0" y="0" font-family="Georgia, serif" font-size="16" fill="#e94560" font-weight="bold">Without Exception Handling:</text>
+      <text x="0" y="25" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">"The recipe says add eggs, but we have none..."</text>
+      <text x="0" y="50" font-family="Georgia, serif" font-size="14" fill="#e94560">*Kitchen explodes* 💥</text>
+      <text x="0" y="75" font-family="Georgia, serif" font-size="14" fill="#8892b0">(No dinner tonight)</text>
+    </g>
+    
+    <!-- With -->
+    <g transform="translate(550, 75)">
+      <text x="0" y="0" font-family="Georgia, serif" font-size="16" fill="#4ecca3" font-weight="bold">With Exception Handling:</text>
+      <text x="0" y="25" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">"The recipe says add eggs, but we have none..."</text>
+      <text x="0" y="50" font-family="Georgia, serif" font-size="14" fill="#4ecca3">"Let's substitute or order pizza instead!" 🍕</text>
+      <text x="0" y="75" font-family="Georgia, serif" font-size="14" fill="#8892b0">(Still get to eat!)</text>
+    </g>
+  </g>
+</svg>

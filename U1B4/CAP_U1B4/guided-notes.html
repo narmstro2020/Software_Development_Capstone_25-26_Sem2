@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C# Arrays, Collections &amp; Exception Handling - Guided Notes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            color: #ccd6f6;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4ecca3;
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #8892b0;
+            margin-bottom: 2rem;
+        }
+
+        .demo-section {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #2d2d44;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .demo-section h2 {
+            color: #e94560;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .demo-section h2::before {
+            content: "▸";
+            color: #4ecca3;
+        }
+
+        .concept-box {
+            background: #0f0f1a;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #4ecca3;
+        }
+
+        .concept-box.warning {
+            border-left-color: #e94560;
+        }
+
+        .concept-box.info {
+            border-left-color: #7b68ee;
+        }
+
+        .concept-box h3 {
+            color: #4ecca3;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .concept-box.warning h3 {
+            color: #e94560;
+        }
+
+        .concept-box.info h3 {
+            color: #7b68ee;
+        }
+
+        .code-block {
+            background: #0f0f1a;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            border: 1px solid #2d2d44;
+        }
+
+        .code-block pre {
+            margin: 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .code-block .comment { color: #546e7a; }
+        .code-block .keyword { color: #c792ea; }
+        .code-block .type { color: #c792ea; }
+        .code-block .string { color: #c3e88d; }
+        .code-block .number { color: #ffc107; }
+        .code-block .method { color: #82aaff; }
+        .code-block .variable { color: #ccd6f6; }
+
+        .output-box {
+            background: #0a0a12;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid #4ecca3;
+            font-family: 'Consolas', monospace;
+        }
+
+        .output-box::before {
+            content: "Output:";
+            display: block;
+            color: #4ecca3;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .output-box .prompt {
+            color: #4ecca3;
+        }
+
+        .output-box .output {
+            color: #ccd6f6;
+        }
+
+        .output-box .error {
+            color: #e94560;
+        }
+
+        .fill-in {
+            background: #2d2d44;
+            border: 2px dashed #4ecca3;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            display: inline-block;
+            min-width: 150px;
+            margin: 0.25rem;
+            color: #8892b0;
+            font-family: 'Consolas', monospace;
+        }
+
+        .notes-area {
+            background: #0f0f1a;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 2px solid #ffc107;
+        }
+
+        .notes-area h4 {
+            color: #ffc107;
+            margin-bottom: 0.5rem;
+        }
+
+        .notes-area textarea {
+            width: 100%;
+            min-height: 60px;
+            background: #1a1a2e;
+            border: 1px solid #2d2d44;
+            border-radius: 4px;
+            color: #ccd6f6;
+            padding: 0.5rem;
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        .key-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .key-point {
+            background: #2d2d44;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid #7b68ee;
+        }
+
+        .key-point code {
+            background: #0f0f1a;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            color: #4ecca3;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid #2d2d44;
+        }
+
+        .comparison-table th {
+            background: #2d2d44;
+            color: #4ecca3;
+        }
+
+        .comparison-table td {
+            background: #0f0f1a;
+        }
+
+        .comparison-table code {
+            color: #c792ea;
+        }
+
+        .emoji-bullet {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .emoji-bullet li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .emoji-bullet li::before {
+            position: absolute;
+            left: 0;
+        }
+
+        .section-divider {
+            text-align: center;
+            margin: 2rem 0;
+            color: #8892b0;
+        }
+
+        .section-divider::before,
+        .section-divider::after {
+            content: "─────────";
+            margin: 0 1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>📚 C# Arrays, Collections &amp; Exceptions</h1>
+    <p class="subtitle">Guided Notes - Follow along in Visual Studio or VS Code!</p>
+
+    <!-- SECTION 1: Arrays -->
+    <section class="demo-section">
+        <h2>Demo 1: Creating Arrays</h2>
+        
+        <div class="concept-box">
+            <h3>💡 What is an Array?</h3>
+            <p>An array is a collection of items of the <strong>same type</strong> stored in <strong>contiguous memory</strong>. Arrays have a <strong>fixed size</strong> - once created, you cannot add or remove elements.</p>
+        </div>
+
+        <div class="code-block">
+            <pre><span class="comment">// ============================================</span>
+<span class="comment">// DEMO 1: Three Ways to Create Arrays</span>
+<span class="comment">// ============================================</span>
+
+<span class="comment">// Method 1: Declare and initialize with values (most common)</span>
+<span class="type">int</span>[] scores = { <span class="number">95</span>, <span class="number">87</span>, <span class="number">92</span>, <span class="number">78</span>, <span class="number">88</span> };
+
+<span class="comment">// Method 2: Using 'new' with a specific size (values default to 0)</span>
+<span class="type">int</span>[] temperatures = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">7</span>];  <span class="comment">// Array of 7 zeros</span>
+
+<span class="comment">// Method 3: Using 'new' with initializer list</span>
+<span class="type">string</span>[] weekdays = <span class="keyword">new</span> <span class="type">string</span>[] { <span class="string">"Mon"</span>, <span class="string">"Tue"</span>, <span class="string">"Wed"</span>, <span class="string">"Thu"</span>, <span class="string">"Fri"</span> };
+
+<span class="comment">// Print array info</span>
+Console.<span class="method">WriteLine</span>(<span class="string">$"Scores array length: {scores.Length}"</span>);
+Console.<span class="method">WriteLine</span>(<span class="string">$"First score: {scores[0]}"</span>);
+Console.<span class="method">WriteLine</span>(<span class="string">$"Last score: {scores[scores.Length - 1]}"</span>);</pre>
+        </div>
+
+        <div class="output-box">
+            <span class="output">Scores array length: 5</span><br>
+            <span class="output">First score: 95</span><br>
+            <span class="output">Last score: 88</span>
+        </div>
+
+        <div class="notes-area">
+            <h4>📝 Your Notes:</h4>
+            <textarea placeholder="Write key observations here..."></textarea>
+        </div>
+
+        <div class="concept-box warning">
+            <h3>⚠️ Common Mistake: Index Out of Bounds</h3>
+            <p>Arrays are <strong>zero-indexed</strong>! An array of 5 elements has indexes 0, 1, 2, 3, 4 (NOT 1-5).</p>
+            <code>scores[5]</code> would crash because valid indexes are only 0-4!
+        </div>
+    </section>
+
+    <!-- SECTION 2: Working with Arrays -->
+    <section class="demo-section">
+        <h2>Demo 2: Working with Arrays</h2>
+
+        <div class="code-block">
+            <pre><span class="comment">// ============================================</span>
+<span class="comment">// DEMO 2: Accessing and Modifying Array Elements</span>
+<span class="comment">// ============================================</span>
+
+<span class="type">string</span>[] students = { <span class="string">"Alice"</span>, <span class="string">"Bob"</span>, <span class="string">"Charlie"</span>, <span class="string">"Diana"</span> };
+
+<span class="comment">// Reading elements by index</span>
+Console.<span class="method">WriteLine</span>(<span class="string">$"First student: {students[0]}"</span>);
+Console.<span class="method">WriteLine</span>(<span class="string">$"Third student: {students[2]}"</span>);
+
+<span class="comment">// Modifying an element</span>
+students[<span class="number">1</span>] = <span class="string">"Bobby"</span>;  <span class="comment">// Change "Bob" to "Bobby"</span>
+Console.<span class="method">WriteLine</span>(<span class="string">$"Updated second student: {students[1]}"</span>);
+
+<span class="comment">// Looping through all elements with foreach</span>
+Console.<span class="method">WriteLine</span>(<span class="string">"\nAll students:"</span>);
+<span class="keyword">foreach</span> (<span class="type">string</span> student <span class="keyword">in</span> students)
+{
+    Console.<span class="method">WriteLine</span>(<span class="string">$"  - {student}"</span>);
+}
+
+<span class="comment">// Looping with for loop (when you need the index)</span>
+Console.<span class="method">WriteLine</span>(<span class="string">"\nWith index numbers:"</span>);
+<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; students.Length; i++)
+{
+    Console.<span class="method">WriteLine</span>(<span class="string">$"  [{i}] {students[i]}"</span>);
+}</pre>
+        </div>
+
+        <div class="output-box">
+            <span class="output">First student: Alice</span><br>
+            <span class="output">Third student: Charlie</span><br>
+            <span class="output">Updated second student: Bobby</span><br>
+            <span class="output"><br>All students:</span><br>
+            <span class="output">  - Alice</span><br>
+            <span class="output">  - Bobby</span><br>
+            <span class="output">  - Charlie</span><br>
+            <span class="output">  - Diana</span><br>
+            <span class="output"><br>With index numbers:</span><br>
+            <span class="output">  [0] Alice</span><br>
+            <span class="output">  [1] Bobby</span><br>
+            <span class="output">  [2] Charlie</span><br>
+            <span class="output">  [3] Diana</span>
+        </div>
+
+        <div class="key-points">
+            <div class="key-point">
+                <strong>foreach loop:</strong><br>
+                Use when you just need to read each value. Simpler syntax!
+            </div>
+            <div class="key-point">
+                <strong>for loop:</strong><br>
+                Use when you need the index position or want to modify elements.
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider">Part 2: Collection Types</div>
+
+    <!-- SECTION 3: Lists -->
+    <section class="demo-section">
+        <h2>Demo 3: List&lt;T&gt; - Dynamic Arrays</h2>
+
+        <div class="concept-box">
+            <h3>💡 Why List instead of Array?</h3>
+            <p>Lists can <strong>grow and shrink</strong> dynamically. You can add and remove items whenever you want! Use <code>using System.Collections.Generic;</code> at the top of your file.</p>
+        </div>
+
+        <div class="code-block">
+            <pre><span class="comment">// ============================================</span>
+<span class="comment">// DEMO 3: Lists - Add, Remove, and More!</span>
+<span class="comment">// ============================================</span>
+<span class="keyword">using</span> System.Collections.Generic;
+
+<span class="comment">// Create an empty list</span>
+List&lt;<span class="type">string</span>&gt; shoppingList = <span class="keyword">new</span> List&lt;<span class="type">string</span>&gt;();
+
+<span class="comment">// Add items</span>
+shoppingList.<span class="method">Add</span>(<span class="string">"Milk"</span>);
+shoppingList.<span class="method">Add</span>(<span class="string">"Bread"</span>);
+shoppingList.<span class="method">Add</span>(<span class="string">"Eggs"</span>);
+shoppingList.<span class="method">Add</span>(<span class="string">"Butter"</span>);
+
+Console.<span class="method">WriteLine</span>(<span class="string">$"Items in list: {shoppingList.Count}"</span>);
+
+<span class="comment">// Remove an item</span>
+shoppingList.<span class="method">Remove</span>(<span class="string">"Bread"</span>);
+Console.<span class="method">WriteLine</span>(<span class="string">$"After removing Bread: {shoppingList.Count}"</span>);
+
+<span class="comment">// Check if item exists</span>
+<span class="keyword">if</span> (shoppingList.<span class="method">Contains</span>(<span class="string">"Milk"</span>))
+{
+    Console.<span class="method">WriteLine</span>(<span class="string">"Don't forget the milk!"</span>);
+}
+
+<span class="comment">// Insert at specific position</span>
+shoppingList.<span class="method">Insert</span>(<span class="number">0</span>, <span class="string">"Coffee"</span>);  <span class="comment">// Insert at beginning</span>
+
+<span class="comment">// Print all items</span>
+Console.<span class="method">WriteLine</span>(<span class="string">"\nShopping List:"</span>);
+<span class="keyword">foreach</span> (<span class="type">string</span> item <span class="keyword">in</span> shoppingList)
+{
+    Console.<span class="method">WriteLine</span>(<span class="string">$"  □ {item}"</span>);
+}</pre>
+        </div>
+
+        <div class="output-box">
+            <span class="output">Items in list: 4</span><br>
+            <span class="output">After removing Bread: 3</span><br>
+            <span class="output">Don't forget the milk!</span><br>
+            <span class="output"><br>Shopping List:</span><br>
+            <span class="output">  □ Coffee</span><br>
+            <span class="output">  □ Milk</span><br>
+            <span class="output">  □ Eggs</span><br>
+            <span class="output">  □ Butter</span>
+        </div>
+
+        <table class="comparison-table">
+            <tr>
+                <th>List Method</th>
+                <th>What It Does</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td><code>.Add(item)</code></td>
+                <td>Adds item to end</td>
+                <td><code>list.Add("Apple")</code></td>
+            </tr>
+            <tr>
+                <td><code>.Remove(item)</code></td>
+                <td>Removes first occurrence</td>
+                <td><code>list.Remove("Apple")</code></td>
+            </tr>
+            <tr>
+                <td><code>.Insert(index, item)</code></td>
+                <td>Inserts at position</td>
+                <td><code>list.Insert(0, "First")</code></td>
+            </tr>
+            <tr>
+                <td><code>.Contains(item)</code></td>
+                <td>Returns true/false</td>
+                <td><code>list.Contains("Apple")</code></td>
+            </tr>
+            <tr>
+                <td><code>.Count</code></td>
+                <td>Number of items</td>
+                <td><code>list.Count</code></td>
+            </tr>
+            <tr>
+                <td><code>.Clear()</code></td>
+                <td>Removes all items</td>
+                <td><code>list.Clear()</code></td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- SECTION 4: Dictionary -->
+    <section class="demo-section">
+        <h2>Demo 4: Dictionary&lt;TKey, TValue&gt;</h2>
+
+        <div class="concept-box info">
+            <h3>🔑 Key-Value Pairs</h3>
+            <p>A Dictionary stores pairs of related data. Each <strong>key</strong> maps to a <strong>value</strong>. Keys must be unique! Think of it like a real dictionary: the word (key) maps to its definition (value).</p>
+        </div>
+
+        <div class="code-block">
+            <pre><span class="comment">// ============================================</span>
+<span class="comment">// DEMO 4: Dictionary - Key/Value Storage</span>
+<span class="comment">// ============================================</span>
+
+<span class="comment">// Store student grades: Name -> Grade</span>
+Dictionary&lt;<span class="type">string</span>, <span class="type">int</span>&gt; grades = <span class="keyword">new</span> Dictionary&lt;<span class="type">string</span>, <span class="type">int</span>&gt;();
+
+<span class="comment">// Add entries using indexer syntax</span>
+grades[<span class="string">"Alice"</span>] = <span class="number">95</span>;
+grades[<span class="string">"Bob"</span>] = <span class="number">87</span>;
+grades[<span class="string">"Charlie"</span>] = <span class="number">92</span>;
+
+<span class="comment">// Or use Add method</span>
+grades.<span class="method">Add</span>(<span class="string">"Diana"</span>, <span class="number">88</span>);
+
+<span class="comment">// Look up a value by key</span>
+Console.<span class="method">WriteLine</span>(<span class="string">$"Alice's grade: {grades["Alice"]}"</span>);
+
+<span class="comment">// Update a value</span>
+grades[<span class="string">"Bob"</span>] = <span class="number">90</span>;  <span class="comment">// Bob studied more!</span>
+
+<span class="comment">// Safe lookup with TryGetValue</span>
+<span class="keyword">if</span> (grades.<span class="method">TryGetValue</span>(<span class="string">"Eve"</span>, <span class="keyword">out</span> <span class="type">int</span> eveGrade))
+{
+    Console.<span class="method">WriteLine</span>(<span class="string">$"Eve's grade: {eveGrade}"</span>);
+}
+<span class="keyword">else</span>
+{
+    Console.<span class="method">WriteLine</span>(<span class="string">"Eve not found in gradebook."</span>);
+}
+
+<span class="comment">// Loop through all entries</span>
+Console.<span class="method">WriteLine</span>(<span class="string">"\nAll Grades:"</span>);
+<span class="keyword">foreach</span> (<span class="keyword">var</span> entry <span class="keyword">in</span> grades)
+{
+    Console.<span class="method">WriteLine</span>(<span class="string">$"  {entry.Key}: {entry.Value}"</span>);
+}</pre>
+        </div>
+
+        <div class="output-box">
+            <span class="output">Alice's grade: 95</span><br>
+            <span class="output">Eve not found in gradebook.</span><br>
+            <span class="output"><br>All Grades:</span><br>
+            <span class="output">  Alice: 95</span><br>
+            <span class="output">  Bob: 90</span><br>
+            <span class="output">  Charlie: 92</span><br>
+            <span class="output">  Diana: 88</span>
+        </div>
+
+        <div class="concept-box warning">
+            <h3>⚠️ KeyNotFoundException</h3>
+            <p>If you try to access a key that doesn't exist using <code>grades["Unknown"]</code>, you'll get an exception! Always use <code>ContainsKey()</code> or <code>TryGetValue()</code> first.</p>
+        </div>
+    </section>
+
+    <div class="section-divider">Part 3: Exception Handling</div>
+
+    <!-- SECTION 5: Basic Exception Handling -->
+    <section class="demo-section">
+        <h2>Demo 5: try-catch Basics</h2>
+
+        <div class="concept-box">
+            <h3>💡 What is an Exception?</h3>
+            <p>An exception is an <strong>error that happens while the program is running</strong>. Without handling, it crashes your program! With <code>try-catch</code>, you can catch the error and respond gracefully.</p>
+        </div>
+
+        <div class="code-block">
+            <pre><span class="comment">// ============================================</span>
+<span class="comment">// DEMO 5: Basic try-catch</span>
+<span class="comment">// ============================================</span>
+
+Console.<span class="method">Write</span>(<span class="string">"Enter a number: "</span>);
+<span class="type">string</span> input = Console.<span class="method">ReadLine</span>();
+
+<span class="keyword">try</span>
+{
+    <span class="comment">// This code might throw an exception</span>
+    <span class="type">int</span> number = <span class="type">int</span>.<span class="method">Parse</span>(input);
+    <span class="type">int</span> result = <span class="number">100</span> / number;
+    Console.<span class="method">WriteLine</span>(<span class="string">$"100 divided by {number} = {result}"</span>);
+}
+<span class="keyword">catch</span> (FormatException)
+{
+    <span class="comment">// Runs if input wasn't a valid number</span>
+    Console.<span class="method">WriteLine</span>(<span class="string">"That's not a valid number!"</span>);
+}
+<span class="keyword">catch</span> (DivideByZeroException)
+{
+    <span class="comment">// Runs if user entered 0</span>
+    Console.<span class="method">WriteLine</span>(<span class="string">"Cannot divide by zero!"</span>);
+}
+
+Console.<span class="method">WriteLine</span>(<span class="string">"Program continues running..."</span>);</pre>
+        </div>
+
+        <div class="output-box">
+            <span class="prompt">Enter a number: </span><span class="output">hello</span><br>
+            <span class="error">That's not a valid number!</span><br>
+            <span class="output">Program continues running...</span>
+        </div>
+
+        <div class="output-box">
+            <span class="prompt">Enter a number: </span><span class="output">0</span><br>
+            <span class="error">Cannot divide by zero!</span><br>
+            <span class="output">Program continues running...</span>
+        </div>
+
+        <div class="output-box">
+            <span class="prompt">Enter a number: </span><span class="output">5</span><br>
+            <span class="output">100 divided by 5 = 20</span><br>
+            <span class="output">Program continues running...</span>
+        </div>
+    </section>
+
+    <!-- SECTION 6: The Exception Object -->
+    <section class="demo-section">
+        <h2>Demo 6: Using the Exception Object</h2>
+
+        <div class="code-block">
+            <pre><span class="comment">// ============================================</span>
+<span class="comment">// DEMO 6: Getting Information from Exceptions</span>
+<span class="comment">// ============================================</span>
+
+<span class="type">int</span>[] numbers = { <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span> };
+
+<span class="keyword">try</span>
+{
+    Console.<span class="method">WriteLine</span>(numbers[<span class="number">10</span>]);  <span class="comment">// Invalid index!</span>
+}
+<span class="keyword">catch</span> (IndexOutOfRangeException ex)
+{
+    <span class="comment">// 'ex' is the exception object - it has useful information!</span>
+    Console.<span class="method">WriteLine</span>(<span class="string">$"Error Type: {ex.GetType().Name}"</span>);
+    Console.<span class="method">WriteLine</span>(<span class="string">$"Message: {ex.Message}"</span>);
+}
+
+<span class="comment">// Catch-all pattern: catch ANY exception</span>
+<span class="keyword">try</span>
+{
+    <span class="comment">// Some risky code...</span>
+    <span class="type">string</span> text = <span class="keyword">null</span>;
+    Console.<span class="method">WriteLine</span>(text.Length);  <span class="comment">// null reference!</span>
+}
+<span class="keyword">catch</span> (Exception ex)  <span class="comment">// 'Exception' catches everything</span>
+{
+    Console.<span class="method">WriteLine</span>(<span class="string">$"Something went wrong: {ex.Message}"</span>);
+}</pre>
+        </div>
+
+        <div class="output-box">
+            <span class="output">Error Type: IndexOutOfRangeException</span><br>
+            <span class="output">Message: Index was outside the bounds of the array.</span><br>
+            <span class="output">Something went wrong: Object reference not set to an instance of an object.</span>
+        </div>
+
+        <div class="key-points">
+            <div class="key-point">
+                <strong><code>ex.Message</code></strong><br>
+                Human-readable description of what went wrong
+            </div>
+            <div class="key-point">
+                <strong><code>ex.GetType().Name</code></strong><br>
+                The type of exception that occurred
+            </div>
+            <div class="key-point">
+                <strong><code>catch (Exception ex)</code></strong><br>
+                Catches ALL exceptions (use as last resort)
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: Finally Block -->
+    <section class="demo-section">
+        <h2>Demo 7: The finally Block</h2>
+
+        <div class="concept-box info">
+            <h3>🔒 finally - Always Runs!</h3>
+            <p>The <code>finally</code> block runs <strong>whether or not</strong> an exception occurred. It's perfect for cleanup code like closing files or database connections.</p>
+        </div>
+
+        <div class="code-block">
+            <pre><span class="comment">// ============================================</span>
+<span class="comment">// DEMO 7: try-catch-finally</span>
+<span class="comment">// ============================================</span>
+
+Console.<span class="method">WriteLine</span>(<span class="string">"Starting operation..."</span>);
+
+<span class="keyword">try</span>
+{
+    Console.<span class="method">WriteLine</span>(<span class="string">"  Attempting risky operation..."</span>);
+    <span class="type">int</span> result = <span class="number">10</span> / <span class="number">0</span>;  <span class="comment">// This will throw!</span>
+    Console.<span class="method">WriteLine</span>(<span class="string">"  Operation completed."</span>);  <span class="comment">// Won't run</span>
+}
+<span class="keyword">catch</span> (DivideByZeroException)
+{
+    Console.<span class="method">WriteLine</span>(<span class="string">"  ❌ Error caught: Cannot divide by zero"</span>);
+}
+<span class="keyword">finally</span>
+{
+    <span class="comment">// This ALWAYS runs - even if there was an exception</span>
+    Console.<span class="method">WriteLine</span>(<span class="string">"  🧹 Cleanup: finally block executed"</span>);
+}
+
+Console.<span class="method">WriteLine</span>(<span class="string">"Program continues..."</span>);</pre>
+        </div>
+
+        <div class="output-box">
+            <span class="output">Starting operation...</span><br>
+            <span class="output">  Attempting risky operation...</span><br>
+            <span class="error">  ❌ Error caught: Cannot divide by zero</span><br>
+            <span class="output">  🧹 Cleanup: finally block executed</span><br>
+            <span class="output">Program continues...</span>
+        </div>
+
+        <div class="notes-area">
+            <h4>📝 Quick Summary - Fill in the blanks:</h4>
+            <p>
+                <code>try</code> - Code that <span class="fill-in">might fail</span> goes here<br><br>
+                <code>catch</code> - Handles <span class="fill-in">the exception</span> if one occurs<br><br>
+                <code>finally</code> - <span class="fill-in">Always runs</span> no matter what
+            </p>
+        </div>
+    </section>
+
+    <!-- Summary Section -->
+    <section class="demo-section">
+        <h2>📋 Cheat Sheet</h2>
+
+        <table class="comparison-table">
+            <tr>
+                <th>Collection</th>
+                <th>When to Use</th>
+                <th>Key Property</th>
+            </tr>
+            <tr>
+                <td><code>Array (T[])</code></td>
+                <td>Fixed size, fastest access</td>
+                <td><code>.Length</code></td>
+            </tr>
+            <tr>
+                <td><code>List&lt;T&gt;</code></td>
+                <td>Need to add/remove items</td>
+                <td><code>.Count</code></td>
+            </tr>
+            <tr>
+                <td><code>Dictionary&lt;K,V&gt;</code></td>
+                <td>Key-value lookups</td>
+                <td><code>.Count</code></td>
+            </tr>
+        </table>
+
+        <div class="code-block">
+            <pre><span class="comment">// Quick Reference - Copy these patterns!</span>
+
+<span class="comment">// Array</span>
+<span class="type">int</span>[] nums = { <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> };
+
+<span class="comment">// List</span>
+List&lt;<span class="type">string</span>&gt; items = <span class="keyword">new</span> List&lt;<span class="type">string</span>&gt;();
+items.<span class="method">Add</span>(<span class="string">"item"</span>);
+
+<span class="comment">// Dictionary</span>
+Dictionary&lt;<span class="type">string</span>, <span class="type">int</span>&gt; map = <span class="keyword">new</span> Dictionary&lt;<span class="type">string</span>, <span class="type">int</span>&gt;();
+map[<span class="string">"key"</span>] = <span class="number">42</span>;
+
+<span class="comment">// Exception Handling</span>
+<span class="keyword">try</span> { <span class="comment">/* risky code */</span> }
+<span class="keyword">catch</span> (Exception ex) { Console.<span class="method">WriteLine</span>(ex.Message); }
+<span class="keyword">finally</span> { <span class="comment">/* cleanup */</span> }</pre>
+        </div>
+    </section>
+
+</body>
+</html>
