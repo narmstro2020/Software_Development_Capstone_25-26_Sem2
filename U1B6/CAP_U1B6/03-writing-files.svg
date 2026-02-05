@@ -1,0 +1,216 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+    <linearGradient id="writeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e94560"/>
+      <stop offset="100%" style="stop-color:#c73e54"/>
+    </linearGradient>
+    <linearGradient id="appendGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffc107"/>
+      <stop offset="100%" style="stop-color:#e5ad06"/>
+    </linearGradient>
+    <linearGradient id="fileGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4ecca3"/>
+      <stop offset="100%" style="stop-color:#3db389"/>
+    </linearGradient>
+    <linearGradient id="codeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#7b68ee"/>
+      <stop offset="100%" style="stop-color:#6a5acd"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="900" fill="#0f0f1a"/>
+  
+  <!-- Grid pattern -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1a1a2e" stroke-width="1"/>
+  </pattern>
+  <rect width="1200" height="900" fill="url(#grid)" opacity="0.5"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="1200" height="100" fill="url(#headerGrad)"/>
+  <text x="600" y="60" font-family="Georgia, serif" font-size="42" font-weight="bold" fill="#e94560" text-anchor="middle">Writing Files in C#</text>
+  <text x="600" y="88" font-family="Consolas, monospace" font-size="18" fill="#8892b0" text-anchor="middle">Overwrite vs Append: Know the Difference!</text>
+  
+  <!-- Write vs Append Visual -->
+  <g transform="translate(50, 120)">
+    <!-- Overwrite column -->
+    <rect x="0" y="0" width="540" height="50" rx="10" fill="#e94560" filter="url(#shadow)"/>
+    <text x="270" y="33" font-family="Georgia, serif" font-size="22" fill="white" text-anchor="middle" font-weight="bold">Overwrite (Replace All)</text>
+    
+    <!-- Append column -->
+    <rect x="560" y="0" width="540" height="50" rx="10" fill="#ffc107" filter="url(#shadow)"/>
+    <text x="830" y="33" font-family="Georgia, serif" font-size="22" fill="#1a1a2e" text-anchor="middle" font-weight="bold">Append (Add to End)</text>
+  </g>
+  
+  <!-- Overwrite Box -->
+  <g transform="translate(50, 185)">
+    <rect x="0" y="0" width="540" height="280" rx="15" fill="#1a1a2e" stroke="#e94560" stroke-width="2" filter="url(#shadow)"/>
+    
+    <!-- File visual - before -->
+    <g transform="translate(30, 20)">
+      <text x="0" y="20" font-family="Georgia, serif" font-size="14" fill="#8892b0">Before:</text>
+      <rect x="80" y="0" width="150" height="55" rx="5" fill="#2d2d44"/>
+      <text x="95" y="20" font-family="Consolas, monospace" font-size="12" fill="#ccd6f6">Hello World</text>
+      <text x="95" y="38" font-family="Consolas, monospace" font-size="12" fill="#ccd6f6">Old content</text>
+    </g>
+    
+    <!-- Arrow -->
+    <text x="140" y="100" font-family="Georgia, serif" font-size="24" fill="#e94560">→</text>
+    
+    <!-- File visual - after -->
+    <g transform="translate(170, 75)">
+      <text x="0" y="20" font-family="Georgia, serif" font-size="14" fill="#8892b0">After:</text>
+      <rect x="80" y="0" width="150" height="38" rx="5" fill="#2d2d44"/>
+      <text x="95" y="24" font-family="Consolas, monospace" font-size="12" fill="#4ecca3">New content</text>
+    </g>
+    
+    <line x1="30" y1="125" x2="510" y2="125" stroke="#e94560" stroke-width="1" opacity="0.3"/>
+    
+    <!-- Code -->
+    <g transform="translate(30, 140)">
+      <text x="0" y="15" font-family="Consolas, monospace" font-size="14" fill="#546e7a">// Creates file or replaces content</text>
+      <text x="0" y="40" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">File.</text>
+      <text x="35" y="40" font-family="Consolas, monospace" font-size="14" fill="#82aaff">WriteAllText</text>
+      <text x="150" y="40" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">(</text>
+      <text x="158" y="40" font-family="Consolas, monospace" font-size="14" fill="#c3e88d">"file.txt"</text>
+      <text x="250" y="40" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">,</text>
+      <text x="260" y="40" font-family="Consolas, monospace" font-size="14" fill="#c3e88d">"content"</text>
+      <text x="338" y="40" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">);</text>
+      
+      <text x="0" y="75" font-family="Consolas, monospace" font-size="14" fill="#546e7a">// Write array of strings (one per line)</text>
+      <text x="0" y="100" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">File.</text>
+      <text x="35" y="100" font-family="Consolas, monospace" font-size="14" fill="#82aaff">WriteAllLines</text>
+      <text x="155" y="100" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">(</text>
+      <text x="163" y="100" font-family="Consolas, monospace" font-size="14" fill="#c3e88d">"file.txt"</text>
+      <text x="255" y="100" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">, lines);</text>
+    </g>
+    
+    <text x="270" y="270" font-family="Georgia, serif" font-size="13" fill="#e94560" text-anchor="middle">⚠️ Old content is GONE forever!</text>
+  </g>
+  
+  <!-- Append Box -->
+  <g transform="translate(610, 185)">
+    <rect x="0" y="0" width="540" height="280" rx="15" fill="#1a1a2e" stroke="#ffc107" stroke-width="2" filter="url(#shadow)"/>
+    
+    <!-- File visual - before -->
+    <g transform="translate(30, 20)">
+      <text x="0" y="20" font-family="Georgia, serif" font-size="14" fill="#8892b0">Before:</text>
+      <rect x="80" y="0" width="150" height="55" rx="5" fill="#2d2d44"/>
+      <text x="95" y="20" font-family="Consolas, monospace" font-size="12" fill="#ccd6f6">Hello World</text>
+      <text x="95" y="38" font-family="Consolas, monospace" font-size="12" fill="#ccd6f6">Old content</text>
+    </g>
+    
+    <!-- Arrow -->
+    <text x="140" y="100" font-family="Georgia, serif" font-size="24" fill="#ffc107">→</text>
+    
+    <!-- File visual - after -->
+    <g transform="translate(170, 75)">
+      <text x="0" y="20" font-family="Georgia, serif" font-size="14" fill="#8892b0">After:</text>
+      <rect x="80" y="0" width="150" height="55" rx="5" fill="#2d2d44"/>
+      <text x="95" y="20" font-family="Consolas, monospace" font-size="12" fill="#ccd6f6">Hello World</text>
+      <text x="95" y="38" font-family="Consolas, monospace" font-size="12" fill="#ccd6f6">Old content</text>
+      <text x="95" y="52" font-family="Consolas, monospace" font-size="12" fill="#4ecca3">New line!</text>
+    </g>
+    
+    <line x1="30" y1="125" x2="510" y2="125" stroke="#ffc107" stroke-width="1" opacity="0.3"/>
+    
+    <!-- Code -->
+    <g transform="translate(30, 140)">
+      <text x="0" y="15" font-family="Consolas, monospace" font-size="14" fill="#546e7a">// Adds to end (keeps existing content)</text>
+      <text x="0" y="40" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">File.</text>
+      <text x="35" y="40" font-family="Consolas, monospace" font-size="14" fill="#82aaff">AppendAllText</text>
+      <text x="160" y="40" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">(</text>
+      <text x="168" y="40" font-family="Consolas, monospace" font-size="14" fill="#c3e88d">"file.txt"</text>
+      <text x="260" y="40" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">,</text>
+      <text x="270" y="40" font-family="Consolas, monospace" font-size="14" fill="#c3e88d">"new line"</text>
+      <text x="355" y="40" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">);</text>
+      
+      <text x="0" y="75" font-family="Consolas, monospace" font-size="14" fill="#546e7a">// Append multiple lines</text>
+      <text x="0" y="100" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">File.</text>
+      <text x="35" y="100" font-family="Consolas, monospace" font-size="14" fill="#82aaff">AppendAllLines</text>
+      <text x="165" y="100" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">(</text>
+      <text x="173" y="100" font-family="Consolas, monospace" font-size="14" fill="#c3e88d">"file.txt"</text>
+      <text x="265" y="100" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">, lines);</text>
+    </g>
+    
+    <text x="270" y="270" font-family="Georgia, serif" font-size="13" fill="#4ecca3" text-anchor="middle">✅ Keeps existing content safe!</text>
+  </g>
+  
+  <!-- StreamWriter -->
+  <g transform="translate(50, 490)">
+    <rect x="0" y="0" width="1100" height="210" rx="15" fill="#1a1a2e" stroke="#7b68ee" stroke-width="2" filter="url(#shadow)"/>
+    <text x="550" y="35" font-family="Georgia, serif" font-size="22" fill="#7b68ee" text-anchor="middle" font-weight="bold">StreamWriter - More Control</text>
+    <text x="550" y="55" font-family="Georgia, serif" font-size="14" fill="#8892b0" text-anchor="middle">For writing multiple lines or building content over time</text>
+    <line x1="50" y1="65" x2="1050" y2="65" stroke="#7b68ee" stroke-width="1" opacity="0.3"/>
+    
+    <g transform="translate(50, 80)">
+      <rect x="-10" y="-5" width="500" height="115" rx="5" fill="#ffc107" opacity="0.05"/>
+      
+      <text x="0" y="15" font-family="Consolas, monospace" font-size="15" fill="#ffc107" font-weight="bold">using</text>
+      <text x="50" y="15" font-family="Consolas, monospace" font-size="15" fill="#ccd6f6">(StreamWriter writer =</text>
+      <text x="270" y="15" font-family="Consolas, monospace" font-size="15" fill="#e94560">new</text>
+      <text x="305" y="15" font-family="Consolas, monospace" font-size="15" fill="#ccd6f6">StreamWriter(</text>
+      <text x="425" y="15" font-family="Consolas, monospace" font-size="15" fill="#c3e88d">"output.txt"</text>
+      <text x="540" y="15" font-family="Consolas, monospace" font-size="15" fill="#ccd6f6">))</text>
+      
+      <text x="0" y="40" font-family="Consolas, monospace" font-size="15" fill="#ccd6f6">{</text>
+      <text x="20" y="65" font-family="Consolas, monospace" font-size="15" fill="#ccd6f6">writer.</text>
+      <text x="75" y="65" font-family="Consolas, monospace" font-size="15" fill="#82aaff">WriteLine</text>
+      <text x="155" y="65" font-family="Consolas, monospace" font-size="15" fill="#ccd6f6">(</text>
+      <text x="163" y="65" font-family="Consolas, monospace" font-size="15" fill="#c3e88d">"First line"</text>
+      <text x="268" y="65" font-family="Consolas, monospace" font-size="15" fill="#ccd6f6">);</text>
+      <text x="20" y="90" font-family="Consolas, monospace" font-size="15" fill="#ccd6f6">writer.</text>
+      <text x="75" y="90" font-family="Consolas, monospace" font-size="15" fill="#82aaff">WriteLine</text>
+      <text x="155" y="90" font-family="Consolas, monospace" font-size="15" fill="#ccd6f6">(</text>
+      <text x="163" y="90" font-family="Consolas, monospace" font-size="15" fill="#c3e88d">"Second line"</text>
+      <text x="280" y="90" font-family="Consolas, monospace" font-size="15" fill="#ccd6f6">);</text>
+      <text x="0" y="110" font-family="Consolas, monospace" font-size="15" fill="#ccd6f6">}</text>
+      <text x="30" y="110" font-family="Consolas, monospace" font-size="14" fill="#546e7a">// File is automatically closed here</text>
+    </g>
+    
+    <!-- Append tip -->
+    <rect x="600" y="80" width="460" height="110" rx="10" fill="#2d2d44"/>
+    <text x="830" y="105" font-family="Georgia, serif" font-size="16" fill="#ffc107" text-anchor="middle" font-weight="bold">💡 To Append with StreamWriter:</text>
+    <text x="620" y="135" font-family="Consolas, monospace" font-size="13" fill="#ccd6f6">new StreamWriter(</text>
+    <text x="785" y="135" font-family="Consolas, monospace" font-size="13" fill="#c3e88d">"file.txt"</text>
+    <text x="875" y="135" font-family="Consolas, monospace" font-size="13" fill="#ccd6f6">,</text>
+    <text x="885" y="135" font-family="Consolas, monospace" font-size="13" fill="#ffc107">true</text>
+    <text x="915" y="135" font-family="Consolas, monospace" font-size="13" fill="#ccd6f6">)</text>
+    <text x="620" y="165" font-family="Georgia, serif" font-size="13" fill="#8892b0">Second parameter = append mode (true/false)</text>
+  </g>
+  
+  <!-- Quick Reference Table -->
+  <g transform="translate(50, 725)">
+    <rect x="0" y="0" width="1100" height="140" rx="15" fill="#1a1a2e" stroke="#4ecca3" stroke-width="2" filter="url(#shadow)"/>
+    <text x="550" y="35" font-family="Georgia, serif" font-size="20" fill="#4ecca3" text-anchor="middle" font-weight="bold">🎯 Quick Reference: Write Methods</text>
+    <line x1="50" y1="50" x2="1050" y2="50" stroke="#4ecca3" stroke-width="1" opacity="0.3"/>
+    
+    <text x="100" y="80" font-family="Consolas, monospace" font-size="14" fill="#82aaff" text-anchor="middle">WriteAllText</text>
+    <text x="100" y="100" font-family="Georgia, serif" font-size="12" fill="#8892b0" text-anchor="middle">Write one string</text>
+    <text x="100" y="120" font-family="Georgia, serif" font-size="12" fill="#e94560" text-anchor="middle">(overwrites)</text>
+    
+    <text x="300" y="80" font-family="Consolas, monospace" font-size="14" fill="#82aaff" text-anchor="middle">WriteAllLines</text>
+    <text x="300" y="100" font-family="Georgia, serif" font-size="12" fill="#8892b0" text-anchor="middle">Write string[]</text>
+    <text x="300" y="120" font-family="Georgia, serif" font-size="12" fill="#e94560" text-anchor="middle">(overwrites)</text>
+    
+    <text x="500" y="80" font-family="Consolas, monospace" font-size="14" fill="#82aaff" text-anchor="middle">AppendAllText</text>
+    <text x="500" y="100" font-family="Georgia, serif" font-size="12" fill="#8892b0" text-anchor="middle">Add to end</text>
+    <text x="500" y="120" font-family="Georgia, serif" font-size="12" fill="#ffc107" text-anchor="middle">(keeps existing)</text>
+    
+    <text x="700" y="80" font-family="Consolas, monospace" font-size="14" fill="#82aaff" text-anchor="middle">AppendAllLines</text>
+    <text x="700" y="100" font-family="Georgia, serif" font-size="12" fill="#8892b0" text-anchor="middle">Add lines to end</text>
+    <text x="700" y="120" font-family="Georgia, serif" font-size="12" fill="#ffc107" text-anchor="middle">(keeps existing)</text>
+    
+    <text x="920" y="80" font-family="Consolas, monospace" font-size="14" fill="#82aaff" text-anchor="middle">StreamWriter</text>
+    <text x="920" y="100" font-family="Georgia, serif" font-size="12" fill="#8892b0" text-anchor="middle">Line-by-line control</text>
+    <text x="920" y="120" font-family="Georgia, serif" font-size="12" fill="#7b68ee" text-anchor="middle">(both modes)</text>
+  </g>
+</svg>

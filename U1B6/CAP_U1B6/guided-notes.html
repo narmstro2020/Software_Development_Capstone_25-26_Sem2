@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C# Streams &amp; File Handling - Guided Notes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            color: #ccd6f6;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4ecca3;
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #8892b0;
+            margin-bottom: 2rem;
+        }
+
+        .demo-section {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #2d2d44;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .demo-section h2 {
+            color: #e94560;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .demo-section h2::before {
+            content: "▸";
+            color: #4ecca3;
+        }
+
+        .concept-box {
+            background: #0f0f1a;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #4ecca3;
+        }
+
+        .concept-box.warning {
+            border-left-color: #e94560;
+        }
+
+        .concept-box.info {
+            border-left-color: #7b68ee;
+        }
+
+        .concept-box h3 {
+            color: #4ecca3;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .concept-box.warning h3 {
+            color: #e94560;
+        }
+
+        .concept-box.info h3 {
+            color: #7b68ee;
+        }
+
+        .code-block {
+            background: #0f0f1a;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            border: 1px solid #2d2d44;
+        }
+
+        .code-block pre {
+            margin: 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .code-block .comment { color: #546e7a; }
+        .code-block .keyword { color: #c792ea; }
+        .code-block .type { color: #c792ea; }
+        .code-block .string { color: #c3e88d; }
+        .code-block .number { color: #ffc107; }
+        .code-block .method { color: #82aaff; }
+        .code-block .variable { color: #ccd6f6; }
+
+        .output-box {
+            background: #0a0a12;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid #4ecca3;
+            font-family: 'Consolas', monospace;
+        }
+
+        .output-box::before {
+            content: "Output:";
+            display: block;
+            color: #4ecca3;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .output-box .prompt {
+            color: #4ecca3;
+        }
+
+        .output-box .output {
+            color: #ccd6f6;
+        }
+
+        .output-box .error {
+            color: #e94560;
+        }
+
+        .fill-in {
+            background: #2d2d44;
+            border: 2px dashed #4ecca3;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            display: inline-block;
+            min-width: 150px;
+            margin: 0.25rem;
+            color: #8892b0;
+            font-family: 'Consolas', monospace;
+        }
+
+        .notes-area {
+            background: #0f0f1a;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 2px solid #ffc107;
+        }
+
+        .notes-area h4 {
+            color: #ffc107;
+            margin-bottom: 0.5rem;
+        }
+
+        .notes-area textarea {
+            width: 100%;
+            min-height: 60px;
+            background: #1a1a2e;
+            border: 1px solid #2d2d44;
+            border-radius: 4px;
+            color: #ccd6f6;
+            padding: 0.5rem;
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        .key-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .key-point {
+            background: #2d2d44;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid #7b68ee;
+        }
+
+        .key-point code {
+            background: #0f0f1a;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            color: #4ecca3;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid #2d2d44;
+        }
+
+        .comparison-table th {
+            background: #2d2d44;
+            color: #4ecca3;
+        }
+
+        .comparison-table td {
+            background: #0f0f1a;
+        }
+
+        .comparison-table code {
+            background: #1a1a2e;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            color: #82aaff;
+        }
+
+        .section-divider {
+            text-align: center;
+            padding: 1rem;
+            margin: 2rem auto;
+            max-width: 1000px;
+            font-size: 1.5rem;
+            color: #4ecca3;
+            border-top: 2px solid #2d2d44;
+            border-bottom: 2px solid #2d2d44;
+        }
+
+        strong {
+            color: #ccd6f6;
+        }
+
+        code {
+            background: #0f0f1a;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            color: #4ecca3;
+            font-family: 'Consolas', monospace;
+        }
+
+        a {
+            color: #4ecca3;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>📂 C# Streams &amp; File Handling</h1>
+    <p class="subtitle">Guided Notes - Follow along in Visual Studio or VS Code!</p>
+
+    <div class="section-divider">Part 1: Writing &amp; Reading Files</div>
+
+    <!-- SECTION 1: Writing to Files -->
+    <section class="demo-section">
+        <h2>Demo 1: Writing to a File</h2>
+
+        <div class="concept-box">
+            <h3>💡 Why File Handling?</h3>
+            <p>Variables only exist while your program is running. When the program ends, all data is lost! Files let you <strong>save data permanently</strong> so it's there next time you run your program.</p>
+        </div>
+
+        <div class="code-block">
+            <pre><span class="comment">// ============================================</span>
+<span class="comment">// DEMO 1: Writing Text to a File</span>
+<span class="comment">// ============================================</span>
+<span class="keyword">using</span> System.IO;
+
+<span class="comment">// Write a single string to a file (creates or overwrites)</span>
+File.<span class="method">WriteAllText</span>(<span class="string">"hello.txt"</span>, <span class="string">"Hello, World!\nWelcome to file handling!"</span>);
+Console.<span class="method">WriteLine</span>(<span class="string">"File written successfully!"</span>);
+
+<span class="comment">// Write an array of strings (one per line)</span>
+<span class="type">string</span>[] lines = { <span class="string">"Line 1: First entry"</span>, <span class="string">"Line 2: Second entry"</span>, <span class="string">"Line 3: Third entry"</span> };
+File.<span class="method">WriteAllLines</span>(<span class="string">"lines.txt"</span>, lines);
+Console.<span class="method">WriteLine</span>(<span class="string">"Lines file written!"</span>);</pre>
+        </div>
+
+        <div class="output-box">
+            <span class="output">File written successfully!</span><br>
+            <span class="output">Lines file written!</span>
+        </div>
+
+        <div class="key-points">
+            <div class="key-point">
+                <strong><code>File.WriteAllText()</code></strong><br>
+                Writes one string to a file. Creates the file if it doesn't exist.
+            </div>
+            <div class="key-point">
+                <strong><code>File.WriteAllLines()</code></strong><br>
+                Writes a string[] array, each element becomes one line in the file.
+            </div>
+            <div class="key-point">
+                <strong><code>using System.IO;</code></strong><br>
+                Required at the top of your file to use File, StreamReader, StreamWriter, etc.
+            </div>
+        </div>
+
+        <div class="concept-box warning">
+            <h3>⚠️ Overwrite Warning</h3>
+            <p><code>WriteAllText()</code> and <code>WriteAllLines()</code> will <strong>replace</strong> the entire file contents! If the file already exists, the old content is gone forever.</p>
+        </div>
+
+        <div class="notes-area">
+            <h4>📝 Your Notes:</h4>
+            <textarea placeholder="Write your observations here..."></textarea>
+        </div>
+    </section>
+
+    <!-- SECTION 2: Reading Files -->
+    <section class="demo-section">
+        <h2>Demo 2: Reading from a File</h2>
+
+        <div class="concept-box info">
+            <h3>🔑 Always Check First!</h3>
+            <p>Before reading a file, use <code>File.Exists(path)</code> to check if it's there. Otherwise you'll get a <code>FileNotFoundException</code>!</p>
+        </div>
+
+        <div class="code-block">
+            <pre><span class="comment">// ============================================</span>
+<span class="comment">// DEMO 2: Reading Text from a File</span>
+<span class="comment">// ============================================</span>
+
+<span class="comment">// First, always check if the file exists!</span>
+<span class="keyword">if</span> (File.<span class="method">Exists</span>(<span class="string">"hello.txt"</span>))
+{
+    <span class="comment">// Read entire file as one string</span>
+    <span class="type">string</span> content = File.<span class="method">ReadAllText</span>(<span class="string">"hello.txt"</span>);
+    Console.<span class="method">WriteLine</span>(<span class="string">"--- File Content ---"</span>);
+    Console.<span class="method">WriteLine</span>(content);
+}
+<span class="keyword">else</span>
+{
+    Console.<span class="method">WriteLine</span>(<span class="string">"File not found!"</span>);
+}
+
+<span class="comment">// Read file as an array of lines</span>
+<span class="keyword">if</span> (File.<span class="method">Exists</span>(<span class="string">"lines.txt"</span>))
+{
+    <span class="type">string</span>[] lines = File.<span class="method">ReadAllLines</span>(<span class="string">"lines.txt"</span>);
+    Console.<span class="method">WriteLine</span>(<span class="string">$"File has {lines.Length} lines:"</span>);
+
+    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; lines.Length; i++)
+    {
+        Console.<span class="method">WriteLine</span>(<span class="string">$"  [{i}] {lines[i]}"</span>);
+    }
+}</pre>
+        </div>
+
+        <div class="output-box">
+            <span class="output">--- File Content ---</span><br>
+            <span class="output">Hello, World!</span><br>
+            <span class="output">Welcome to file handling!</span><br>
+            <br>
+            <span class="output">File has 3 lines:</span><br>
+            <span class="output">  [0] Line 1: First entry</span><br>
+            <span class="output">  [1] Line 2: Second entry</span><br>
+            <span class="output">  [2] Line 3: Third entry</span>
+        </div>
+
+        <table class="comparison-table">
+            <tr>
+                <th>Method</th>
+                <th>Returns</th>
+                <th>Use When</th>
+            </tr>
+            <tr>
+                <td><code>File.ReadAllText(path)</code></td>
+                <td>One <code>string</code></td>
+                <td>You need the whole file at once</td>
+            </tr>
+            <tr>
+                <td><code>File.ReadAllLines(path)</code></td>
+                <td><code>string[]</code> array</td>
+                <td>You need to process line by line</td>
+            </tr>
+            <tr>
+                <td><code>File.Exists(path)</code></td>
+                <td><code>bool</code></td>
+                <td>Always check before reading!</td>
+            </tr>
+        </table>
+    </section>
+
+    <div class="section-divider">Part 2: Appending &amp; Streams</div>
+
+    <!-- SECTION 3: Appending -->
+    <section class="demo-section">
+        <h2>Demo 3: Appending to Files</h2>
+
+        <div class="concept-box">
+            <h3>📎 Append = Add to the End</h3>
+            <p>Unlike <code>WriteAllText</code> which replaces everything, <strong>appending</strong> adds new content to the end of the file while keeping what's already there. Great for logs!</p>
+        </div>
+
+        <div class="code-block">
+            <pre><span class="comment">// ============================================</span>
+<span class="comment">// DEMO 3: Appending vs Overwriting</span>
+<span class="comment">// ============================================</span>
+
+<span class="comment">// Start with a fresh file</span>
+File.<span class="method">WriteAllText</span>(<span class="string">"log.txt"</span>, <span class="string">"=== Application Log ===\n"</span>);
+Console.<span class="method">WriteLine</span>(<span class="string">"Log file created."</span>);
+
+<span class="comment">// Append entries (keeps existing content!)</span>
+File.<span class="method">AppendAllText</span>(<span class="string">"log.txt"</span>, <span class="string">"Entry 1: Application started\n"</span>);
+File.<span class="method">AppendAllText</span>(<span class="string">"log.txt"</span>, <span class="string">"Entry 2: User logged in\n"</span>);
+File.<span class="method">AppendAllText</span>(<span class="string">"log.txt"</span>, <span class="string">"Entry 3: Data saved\n"</span>);
+Console.<span class="method">WriteLine</span>(<span class="string">"Entries appended."</span>);
+
+<span class="comment">// Read and display the full file</span>
+<span class="type">string</span> logContent = File.<span class="method">ReadAllText</span>(<span class="string">"log.txt"</span>);
+Console.<span class="method">WriteLine</span>(<span class="string">"\n--- Full Log ---"</span>);
+Console.<span class="method">WriteLine</span>(logContent);</pre>
+        </div>
+
+        <div class="output-box">
+            <span class="output">Log file created.</span><br>
+            <span class="output">Entries appended.</span><br>
+            <br>
+            <span class="output">--- Full Log ---</span><br>
+            <span class="output">=== Application Log ===</span><br>
+            <span class="output">Entry 1: Application started</span><br>
+            <span class="output">Entry 2: User logged in</span><br>
+            <span class="output">Entry 3: Data saved</span>
+        </div>
+    </section>
+
+    <!-- SECTION 4: StreamReader/Writer -->
+    <section class="demo-section">
+        <h2>Demo 4: StreamReader &amp; StreamWriter</h2>
+
+        <div class="concept-box info">
+            <h3>🔒 The 'using' Statement</h3>
+            <p><code>using</code> automatically calls <code>.Close()</code> and <code>.Dispose()</code> on the stream when the block ends. This is the same cleanup concept from <code>finally</code> in exception handling! <strong>Always use <code>using</code> with streams.</strong></p>
+        </div>
+
+        <div class="code-block">
+            <pre><span class="comment">// ============================================</span>
+<span class="comment">// DEMO 4: StreamWriter and StreamReader</span>
+<span class="comment">// ============================================</span>
+
+<span class="comment">// Writing with StreamWriter</span>
+<span class="keyword">using</span> (StreamWriter writer = <span class="keyword">new</span> StreamWriter(<span class="string">"students.txt"</span>))
+{
+    writer.<span class="method">WriteLine</span>(<span class="string">"Name,Grade,GPA"</span>);
+    writer.<span class="method">WriteLine</span>(<span class="string">"Alice,12,3.8"</span>);
+    writer.<span class="method">WriteLine</span>(<span class="string">"Bob,11,3.5"</span>);
+    writer.<span class="method">WriteLine</span>(<span class="string">"Charlie,12,3.9"</span>);
+}
+<span class="comment">// File is automatically closed here!</span>
+
+Console.<span class="method">WriteLine</span>(<span class="string">"Student file written."</span>);
+
+<span class="comment">// Reading with StreamReader</span>
+<span class="keyword">using</span> (StreamReader reader = <span class="keyword">new</span> StreamReader(<span class="string">"students.txt"</span>))
+{
+    <span class="type">string</span> line;
+    <span class="type">int</span> lineNumber = <span class="number">1</span>;
+
+    <span class="keyword">while</span> ((line = reader.<span class="method">ReadLine</span>()) != <span class="keyword">null</span>)
+    {
+        Console.<span class="method">WriteLine</span>(<span class="string">$"  Line {lineNumber}: {line}"</span>);
+        lineNumber++;
+    }
+}</pre>
+        </div>
+
+        <div class="output-box">
+            <span class="output">Student file written.</span><br>
+            <br>
+            <span class="output">  Line 1: Name,Grade,GPA</span><br>
+            <span class="output">  Line 2: Alice,12,3.8</span><br>
+            <span class="output">  Line 3: Bob,11,3.5</span><br>
+            <span class="output">  Line 4: Charlie,12,3.9</span>
+        </div>
+
+        <div class="key-points">
+            <div class="key-point">
+                <strong><code>StreamWriter</code></strong><br>
+                Writes line by line. Use <code>new StreamWriter(path, true)</code> to append.
+            </div>
+            <div class="key-point">
+                <strong><code>StreamReader</code></strong><br>
+                Reads one line at a time. Returns <code>null</code> when no more lines.
+            </div>
+            <div class="key-point">
+                <strong><code>using</code> block</strong><br>
+                Ensures stream is closed automatically — prevents resource leaks!
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider">Part 3: File Operations &amp; Exception Handling</div>
+
+    <!-- SECTION 5: File & Path Operations -->
+    <section class="demo-section">
+        <h2>Demo 5: File &amp; Path Operations</h2>
+
+        <div class="code-block">
+            <pre><span class="comment">// ============================================</span>
+<span class="comment">// DEMO 5: File and Path Operations</span>
+<span class="comment">// ============================================</span>
+
+<span class="type">string</span> fileName = <span class="string">"demo-file.txt"</span>;
+
+<span class="comment">// Create a file</span>
+File.<span class="method">WriteAllText</span>(fileName, <span class="string">"This is a test file."</span>);
+Console.<span class="method">WriteLine</span>(<span class="string">$"File exists? {File.Exists(fileName)}"</span>);
+
+<span class="comment">// Get info using Path class</span>
+Console.<span class="method">WriteLine</span>(<span class="string">$"File name: {Path.GetFileName(fileName)}"</span>);
+Console.<span class="method">WriteLine</span>(<span class="string">$"Extension: {Path.GetExtension(fileName)}"</span>);
+Console.<span class="method">WriteLine</span>(<span class="string">$"Without ext: {Path.GetFileNameWithoutExtension(fileName)}"</span>);
+
+<span class="comment">// Build paths safely with Path.Combine</span>
+<span class="type">string</span> fullPath = Path.<span class="method">Combine</span>(<span class="string">"MyFolder"</span>, <span class="string">"data.txt"</span>);
+Console.<span class="method">WriteLine</span>(<span class="string">$"Combined path: {fullPath}"</span>);
+
+<span class="comment">// Copy and delete</span>
+File.<span class="method">Copy</span>(fileName, <span class="string">"demo-copy.txt"</span>, <span class="keyword">true</span>);
+File.<span class="method">Delete</span>(<span class="string">"demo-copy.txt"</span>);</pre>
+        </div>
+
+        <div class="output-box">
+            <span class="output">File exists? True</span><br>
+            <span class="output">File name: demo-file.txt</span><br>
+            <span class="output">Extension: .txt</span><br>
+            <span class="output">Without ext: demo-file</span><br>
+            <span class="output">Combined path: MyFolder\data.txt</span>
+        </div>
+
+        <table class="comparison-table">
+            <tr>
+                <th>Operation</th>
+                <th>Method</th>
+            </tr>
+            <tr>
+                <td>Check if exists</td>
+                <td><code>File.Exists(path)</code></td>
+            </tr>
+            <tr>
+                <td>Delete a file</td>
+                <td><code>File.Delete(path)</code></td>
+            </tr>
+            <tr>
+                <td>Copy a file</td>
+                <td><code>File.Copy(source, dest, overwrite)</code></td>
+            </tr>
+            <tr>
+                <td>Move/rename</td>
+                <td><code>File.Move(source, dest)</code></td>
+            </tr>
+            <tr>
+                <td>Build paths safely</td>
+                <td><code>Path.Combine("folder", "file.txt")</code></td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- SECTION 6: Exception Handling with Files -->
+    <section class="demo-section">
+        <h2>Demo 6: Exception Handling with Files</h2>
+
+        <div class="concept-box warning">
+            <h3>🛡️ Protecting Your File Code</h3>
+            <p>File operations are one of the most common places you'll need <code>try-catch</code>. Files might not exist, drives might be full, or permission might be denied.</p>
+        </div>
+
+        <div class="code-block">
+            <pre><span class="comment">// ============================================</span>
+<span class="comment">// DEMO 6: try-catch with File Operations</span>
+<span class="comment">// ============================================</span>
+
+<span class="comment">// Scenario 1: File doesn't exist</span>
+<span class="keyword">try</span>
+{
+    <span class="type">string</span> content = File.<span class="method">ReadAllText</span>(<span class="string">"nonexistent.txt"</span>);
+    Console.<span class="method">WriteLine</span>(content);
+}
+<span class="keyword">catch</span> (FileNotFoundException)
+{
+    Console.<span class="method">WriteLine</span>(<span class="string">"❌ File was not found!"</span>);
+}
+
+<span class="comment">// Scenario 2: Safe pattern - check then read/create</span>
+<span class="type">string</span> path = <span class="string">"safe-read.txt"</span>;
+<span class="keyword">try</span>
+{
+    <span class="keyword">if</span> (File.<span class="method">Exists</span>(path))
+    {
+        <span class="type">string</span> text = File.<span class="method">ReadAllText</span>(path);
+        Console.<span class="method">WriteLine</span>(text);
+    }
+    <span class="keyword">else</span>
+    {
+        Console.<span class="method">WriteLine</span>(<span class="string">"File doesn't exist. Creating it..."</span>);
+        File.<span class="method">WriteAllText</span>(path, <span class="string">"Created by the program!"</span>);
+        Console.<span class="method">WriteLine</span>(<span class="string">"✅ File created successfully."</span>);
+    }
+}
+<span class="keyword">catch</span> (IOException ex)
+{
+    Console.<span class="method">WriteLine</span>(<span class="string">$"❌ IO Error: {ex.Message}"</span>);
+}
+
+Console.<span class="method">WriteLine</span>(<span class="string">"✓ Program continues..."</span>);</pre>
+        </div>
+
+        <div class="output-box">
+            <span class="error">❌ File was not found!</span><br>
+            <br>
+            <span class="output">File doesn't exist. Creating it...</span><br>
+            <span class="prompt">✅ File created successfully.</span><br>
+            <span class="output">✓ Program continues...</span>
+        </div>
+    </section>
+
+    <!-- SECTION 7: Save/Load List -->
+    <section class="demo-section">
+        <h2>Demo 7: Practical Example - Save &amp; Load a List</h2>
+
+        <div class="concept-box">
+            <h3>💡 Real-World Pattern</h3>
+            <p>A very common pattern is saving a collection to a file and loading it back. This lets your program <strong>remember data between runs</strong> — just like saving a game!</p>
+        </div>
+
+        <div class="code-block">
+            <pre><span class="comment">// ============================================</span>
+<span class="comment">// DEMO 7: Saving and Loading a List</span>
+<span class="comment">// ============================================</span>
+
+List&lt;<span class="type">string</span>&gt; names = <span class="keyword">new</span> List&lt;<span class="type">string</span>&gt; { <span class="string">"Alice"</span>, <span class="string">"Bob"</span>, <span class="string">"Charlie"</span> };
+
+<span class="comment">// Save list to file</span>
+<span class="type">string</span> savePath = <span class="string">"names.txt"</span>;
+File.<span class="method">WriteAllLines</span>(savePath, names);
+Console.<span class="method">WriteLine</span>(<span class="string">$"Saved {names.Count} names to file."</span>);
+
+<span class="comment">// Clear and reload from file</span>
+names.<span class="method">Clear</span>();
+Console.<span class="method">WriteLine</span>(<span class="string">$"List cleared. Count: {names.Count}"</span>);
+
+<span class="comment">// Load from file</span>
+<span class="keyword">if</span> (File.<span class="method">Exists</span>(savePath))
+{
+    <span class="type">string</span>[] loaded = File.<span class="method">ReadAllLines</span>(savePath);
+    names.<span class="method">AddRange</span>(loaded);
+    Console.<span class="method">WriteLine</span>(<span class="string">$"Loaded {names.Count} names from file."</span>);
+
+    <span class="keyword">foreach</span> (<span class="type">string</span> name <span class="keyword">in</span> names)
+    {
+        Console.<span class="method">WriteLine</span>(<span class="string">$"  - {name}"</span>);
+    }
+}</pre>
+        </div>
+
+        <div class="output-box">
+            <span class="output">Saved 3 names to file.</span><br>
+            <span class="output">List cleared. Count: 0</span><br>
+            <span class="output">Loaded 3 names from file.</span><br>
+            <span class="output">  - Alice</span><br>
+            <span class="output">  - Bob</span><br>
+            <span class="output">  - Charlie</span>
+        </div>
+
+        <div class="notes-area">
+            <h4>📝 Quick Summary - Fill in the blanks:</h4>
+            <p>
+                <code>File.WriteAllText()</code> - <span class="fill-in">Overwrites</span> the file with new content<br><br>
+                <code>File.AppendAllText()</code> - <span class="fill-in">Adds to the end</span> of the file<br><br>
+                <code>File.ReadAllText()</code> - Returns file content as a <span class="fill-in">string</span><br><br>
+                <code>File.ReadAllLines()</code> - Returns file content as a <span class="fill-in">string[]</span><br><br>
+                <code>using</code> - Ensures the stream is <span class="fill-in">closed automatically</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- Summary Section -->
+    <section class="demo-section">
+        <h2>📋 Cheat Sheet</h2>
+
+        <table class="comparison-table">
+            <tr>
+                <th>Method</th>
+                <th>Action</th>
+                <th>Keeps Old Data?</th>
+            </tr>
+            <tr>
+                <td><code>File.WriteAllText()</code></td>
+                <td>Write string</td>
+                <td>❌ No (overwrites)</td>
+            </tr>
+            <tr>
+                <td><code>File.WriteAllLines()</code></td>
+                <td>Write string[]</td>
+                <td>❌ No (overwrites)</td>
+            </tr>
+            <tr>
+                <td><code>File.AppendAllText()</code></td>
+                <td>Add string</td>
+                <td>✅ Yes</td>
+            </tr>
+            <tr>
+                <td><code>File.AppendAllLines()</code></td>
+                <td>Add string[]</td>
+                <td>✅ Yes</td>
+            </tr>
+            <tr>
+                <td><code>File.ReadAllText()</code></td>
+                <td>Read → string</td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td><code>File.ReadAllLines()</code></td>
+                <td>Read → string[]</td>
+                <td>N/A</td>
+            </tr>
+        </table>
+
+        <div class="code-block">
+            <pre><span class="comment">// Quick Reference - Copy these patterns!</span>
+<span class="keyword">using</span> System.IO;
+
+<span class="comment">// Write to file</span>
+File.<span class="method">WriteAllText</span>(<span class="string">"file.txt"</span>, <span class="string">"content"</span>);
+
+<span class="comment">// Read from file</span>
+<span class="type">string</span> content = File.<span class="method">ReadAllText</span>(<span class="string">"file.txt"</span>);
+<span class="type">string</span>[] lines = File.<span class="method">ReadAllLines</span>(<span class="string">"file.txt"</span>);
+
+<span class="comment">// Append to file</span>
+File.<span class="method">AppendAllText</span>(<span class="string">"file.txt"</span>, <span class="string">"more content\n"</span>);
+
+<span class="comment">// Check if file exists</span>
+<span class="keyword">if</span> (File.<span class="method">Exists</span>(<span class="string">"file.txt"</span>)) { <span class="comment">/* safe to read */</span> }
+
+<span class="comment">// StreamWriter with using</span>
+<span class="keyword">using</span> (StreamWriter writer = <span class="keyword">new</span> StreamWriter(<span class="string">"file.txt"</span>))
+{
+    writer.<span class="method">WriteLine</span>(<span class="string">"line of text"</span>);
+}
+
+<span class="comment">// Path operations</span>
+<span class="type">string</span> path = Path.<span class="method">Combine</span>(<span class="string">"folder"</span>, <span class="string">"file.txt"</span>);</pre>
+        </div>
+    </section>
+
+</body>
+</html>

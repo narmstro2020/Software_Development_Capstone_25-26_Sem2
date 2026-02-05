@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Journal App - C# Activity</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            padding: 1.5rem;
+            color: #ccd6f6;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            color: #4ecca3;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #8892b0;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #2d2d44;
+        }
+
+        .card h2 {
+            color: #e94560;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card h3 {
+            color: #4ecca3;
+            margin: 1rem 0 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .skills-practiced {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-tag {
+            background: #2d2d44;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid #4ecca3;
+            color: #4ecca3;
+        }
+
+        .task-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .task-list li {
+            background: #0f0f1a;
+            margin-bottom: 0.75rem;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #7b68ee;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .task-list li.bonus {
+            border-left-color: #ffc107;
+            opacity: 0.9;
+        }
+
+        .task-number {
+            background: #7b68ee;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .task-list li.bonus .task-number {
+            background: #ffc107;
+            color: #1a1a2e;
+        }
+
+        .task-content {
+            flex: 1;
+        }
+
+        .task-content strong {
+            color: #ccd6f6;
+        }
+
+        .task-content p {
+            color: #8892b0;
+            margin-top: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        .code-hint {
+            background: #0f0f1a;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            margin-top: 0.5rem;
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            border: 1px solid #2d2d44;
+        }
+
+        .code-hint::before {
+            content: "💡 Hint: ";
+            color: #ffc107;
+        }
+
+        .example-output {
+            background: #0a0a12;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid #4ecca3;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9rem;
+            white-space: pre-line;
+        }
+
+        .example-output::before {
+            content: "Expected Console Output:";
+            display: block;
+            color: #4ecca3;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .prompt { color: #4ecca3; }
+        .output { color: #ccd6f6; }
+        .error { color: #e94560; }
+        .success { color: #4ecca3; }
+
+        .file-structure {
+            background: #0f0f1a;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9rem;
+        }
+
+        .file-structure .folder {
+            color: #ffc107;
+        }
+
+        .file-structure .file {
+            color: #4ecca3;
+            margin-left: 1.5rem;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: #8892b0;
+        }
+
+        .checklist li::before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            color: #4ecca3;
+            font-size: 1.2rem;
+        }
+
+        code {
+            background: #0f0f1a;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            color: #4ecca3;
+            font-family: 'Consolas', monospace;
+        }
+
+        .reference-card {
+            background: #0f0f1a;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border: 1px solid #2d2d44;
+        }
+
+        .reference-card h4 {
+            color: #7b68ee;
+            margin-bottom: 0.5rem;
+        }
+
+        .reference-card code {
+            display: block;
+            padding: 0.3rem 0.5rem;
+            margin: 0.2rem 0;
+        }
+
+        .reference-card .keyword { color: #c792ea; }
+        .reference-card .type { color: #c792ea; }
+        .reference-card .string { color: #c3e88d; }
+        .reference-card .method { color: #82aaff; }
+        .reference-card .comment { color: #546e7a; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📖 Student Journal App</h1>
+        <p class="subtitle">C# Activity: Streams &amp; File Handling</p>
+    </header>
+
+    <div class="container">
+        <!-- Overview -->
+        <div class="card">
+            <h2>🎯 Your Mission</h2>
+            <p>Build a console-based Journal application that lets users write entries, view them, search through them, and save them to files. Your journal entries will persist between program runs because they're stored in a text file!</p>
+            
+            <div class="skills-practiced">
+                <span class="skill-tag">File.ReadAllLines</span>
+                <span class="skill-tag">File.WriteAllLines</span>
+                <span class="skill-tag">File.AppendAllText</span>
+                <span class="skill-tag">File.Exists</span>
+                <span class="skill-tag">StreamWriter</span>
+                <span class="skill-tag">try-catch</span>
+                <span class="skill-tag">List&lt;T&gt;</span>
+            </div>
+
+            <h3>📁 Files You'll Work With</h3>
+            <div class="file-structure">
+                <div class="folder">📂 Activity/</div>
+                <div class="file">📄 activity-starter.cs - Your starting point (has TODOs)</div>
+                <div class="file">📄 activity.cs - Completed solution (don't peek!)</div>
+            </div>
+        </div>
+
+        <!-- Expected Output -->
+        <div class="card">
+            <h2>🖥️ What You're Building</h2>
+            <div class="example-output"><span class="output">═══════════════════════════════════════════
+          📖 STUDENT JOURNAL
+═══════════════════════════════════════════
+
+What would you like to do?
+  1. Write a new entry
+  2. View all entries
+  3. Search entries
+  4. Save entries to file
+  5. Export entries to new file
+  6. Create backup
+  7. Exit
+
+</span><span class="prompt">Enter choice (1-7): </span><span class="output">1
+
+--- Write New Entry ---
+</span><span class="prompt">What's on your mind? </span><span class="output">Today I learned about file handling in C#!
+
+</span><span class="success">✅ Entry saved: "Today I learned about file handling in C#!"</span></div>
+        </div>
+
+        <!-- Tasks -->
+        <div class="card">
+            <h2>✅ Tasks to Complete</h2>
+            <p style="margin-bottom: 1rem; color: #8892b0;">Find the <code>// TODO</code> comments in the starter file and implement each feature.</p>
+
+            <ul class="task-list">
+                <li>
+                    <span class="task-number">1</span>
+                    <div class="task-content">
+                        <strong>Initialize Collections</strong>
+                        <p>Create a <code>List&lt;string&gt;</code> to store journal entries in memory.</p>
+                        <div class="code-hint">List&lt;string&gt; entries = new List&lt;string&gt;();</div>
+                    </div>
+                </li>
+                <li>
+                    <span class="task-number">2</span>
+                    <div class="task-content">
+                        <strong>Load Entries at Startup</strong>
+                        <p>Check if the journal file exists. If it does, read all lines and add them to the list so previous entries are available.</p>
+                        <div class="code-hint">File.ReadAllLines(path) returns a string[] you can add with entries.AddRange()</div>
+                    </div>
+                </li>
+                <li>
+                    <span class="task-number">3</span>
+                    <div class="task-content">
+                        <strong>Add Entry Method</strong>
+                        <p>Format the entry with a timestamp, add it to the list, and append it to the file so it's saved immediately.</p>
+                        <div class="code-hint">File.AppendAllText(path, entry + "\n") adds to the end without erasing</div>
+                    </div>
+                </li>
+                <li>
+                    <span class="task-number">4</span>
+                    <div class="task-content">
+                        <strong>View All Entries</strong>
+                        <p>Loop through the entries list and display each one with a number. Handle the empty list case.</p>
+                        <div class="code-hint">Use a for loop so you can show entry numbers (i + 1)</div>
+                    </div>
+                </li>
+                <li>
+                    <span class="task-number">5</span>
+                    <div class="task-content">
+                        <strong>Search Entries</strong>
+                        <p>Loop through entries and check if each contains the search term. Use <code>.ToLower()</code> for case-insensitive matching.</p>
+                        <div class="code-hint">entry.ToLower().Contains(searchTerm.ToLower())</div>
+                    </div>
+                </li>
+                <li>
+                    <span class="task-number">6</span>
+                    <div class="task-content">
+                        <strong>Save to File</strong>
+                        <p>Save the entire entries list to the journal file using <code>File.WriteAllLines()</code>. Wrap in try-catch for error handling.</p>
+                        <div class="code-hint">File.WriteAllLines(JournalFile, entries)</div>
+                    </div>
+                </li>
+                <li>
+                    <span class="task-number">7</span>
+                    <div class="task-content">
+                        <strong>Menu Input Validation</strong>
+                        <p>Wrap the menu choice parsing in try-catch to handle non-numeric input gracefully.</p>
+                        <div class="code-hint">catch (FormatException) { Console.WriteLine("Invalid input!"); }</div>
+                    </div>
+                </li>
+                <li class="bonus">
+                    <span class="task-number">⭐</span>
+                    <div class="task-content">
+                        <strong>BONUS: Export Entries</strong>
+                        <p>Use StreamWriter to write a formatted export with a header, date, and all entries to a user-specified filename.</p>
+                        <div class="code-hint">using (StreamWriter writer = new StreamWriter(path)) { writer.WriteLine(...); }</div>
+                    </div>
+                </li>
+                <li class="bonus">
+                    <span class="task-number">⭐</span>
+                    <div class="task-content">
+                        <strong>BONUS: Create Backup</strong>
+                        <p>Copy the journal file to a backup file using <code>File.Copy()</code>.</p>
+                        <div class="code-hint">File.Copy(source, dest, true) — true allows overwriting existing backup</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Reference -->
+        <div class="card">
+            <h2>📚 Quick Reference</h2>
+            
+            <div class="reference-card">
+                <h4>Writing Files</h4>
+                <code>File.<span class="method">WriteAllText</span>(<span class="string">"file.txt"</span>, <span class="string">"content"</span>);     <span class="comment">// Overwrite</span></code>
+                <code>File.<span class="method">WriteAllLines</span>(<span class="string">"file.txt"</span>, stringArray);  <span class="comment">// Overwrite</span></code>
+                <code>File.<span class="method">AppendAllText</span>(<span class="string">"file.txt"</span>, <span class="string">"new text"</span>);  <span class="comment">// Add to end</span></code>
+            </div>
+
+            <div class="reference-card">
+                <h4>Reading Files</h4>
+                <code><span class="type">string</span> text = File.<span class="method">ReadAllText</span>(<span class="string">"file.txt"</span>);     <span class="comment">// One string</span></code>
+                <code><span class="type">string</span>[] lines = File.<span class="method">ReadAllLines</span>(<span class="string">"file.txt"</span>); <span class="comment">// Array of lines</span></code>
+                <code><span class="type">bool</span> exists = File.<span class="method">Exists</span>(<span class="string">"file.txt"</span>);          <span class="comment">// Check first!</span></code>
+            </div>
+
+            <div class="reference-card">
+                <h4>StreamWriter (using block)</h4>
+                <code><span class="keyword">using</span> (StreamWriter writer = <span class="keyword">new</span> StreamWriter(<span class="string">"file.txt"</span>))</code>
+                <code>{</code>
+                <code>    writer.<span class="method">WriteLine</span>(<span class="string">"line of text"</span>);</code>
+                <code>}</code>
+                <code><span class="comment">// To append: new StreamWriter("file.txt", true)</span></code>
+            </div>
+
+            <div class="reference-card">
+                <h4>File Operations</h4>
+                <code>File.<span class="method">Copy</span>(<span class="string">"source.txt"</span>, <span class="string">"dest.txt"</span>, <span class="keyword">true</span>);  <span class="comment">// Copy file</span></code>
+                <code>File.<span class="method">Delete</span>(<span class="string">"file.txt"</span>);                       <span class="comment">// Delete file</span></code>
+            </div>
+
+            <div class="reference-card">
+                <h4>Date/Time Formatting</h4>
+                <code><span class="type">string</span> stamp = DateTime.Now.<span class="method">ToString</span>(<span class="string">"yyyy-MM-dd HH:mm"</span>);</code>
+                <code><span class="comment">// Result: "2025-01-15 14:30"</span></code>
+            </div>
+        </div>
+
+        <!-- Checklist -->
+        <div class="card">
+            <h2>✔️ Completion Checklist</h2>
+            <ul class="checklist">
+                <li>Entries list is initialized correctly</li>
+                <li>Previous entries load from file at startup</li>
+                <li>Can write new entries with timestamps</li>
+                <li>New entries are appended to the file immediately</li>
+                <li>Can view all entries in numbered format</li>
+                <li>Empty journal shows appropriate message</li>
+                <li>Can search entries (case-insensitive)</li>
+                <li>Can save all entries to file</li>
+                <li>Menu handles invalid input gracefully</li>
+                <li>Exit option works correctly</li>
+            </ul>
+        </div>
+
+        <!-- Tips -->
+        <div class="card">
+            <h2>💡 Tips for Success</h2>
+            <ul style="padding-left: 1.5rem; color: #8892b0;">
+                <li style="margin-bottom: 0.5rem;">Start with TODO #1 and #3 — get adding entries working first</li>
+                <li style="margin-bottom: 0.5rem;">Test frequently! Run your code after each change</li>
+                <li style="margin-bottom: 0.5rem;">Check the generated .txt files in your project folder to verify they're correct</li>
+                <li style="margin-bottom: 0.5rem;">Remember: <code>WriteAllText</code> overwrites, <code>AppendAllText</code> adds to the end</li>
+                <li style="margin-bottom: 0.5rem;">Use the Quick Reference at the bottom of the starter file if you get stuck</li>
+                <li style="margin-bottom: 0.5rem;">Don't peek at activity.cs unless you're really stuck!</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
